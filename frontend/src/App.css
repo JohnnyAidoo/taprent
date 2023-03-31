@@ -1,38 +1,82 @@
-.App {
-  text-align: center;
+:root{
+  --primary: #FBF5F3;
+  --secondary: #ffffff;
+  --ctr:#FD5200;
+  --ctr2: #AF3800;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#searchBar{
+  padding: .1%;
+  min-width: 20%;
+  border-radius: 10px;
+  border:solid .2px #D3D4D9;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+#searchBar:hover{
+  outline: solid 1px var(--ctr);
   }
+#searchBar input{
+  width: 85%;
+  position: relative;
+  border-radius: 20px 0 0px 20px;
+  border: none;
+  outline: none;
+  height: 100%;
+  background-color: transparent;
+  padding-left: 5%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#searchBar button{
+  width: 15%;
+  height: 100%;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+#home{
+  width: 80vw;
+}
+a{
+  text-decoration: none;
+  color: black;
+}
+
+li{
+  color: black;
+  width: 90%;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: #fff;
+  text-decoration: none;
+  list-style: none;
+}
+li:hover{
+  background-color: #D3D4D9;
+}
+.active{
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  font-weight: bold;
+}
+#button:hover{
+  background-color: var(--ctr2);
+  color: grey;
+}
+#grid{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 1%;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media screen and (max-width:768px) {
+  #grid{
+    grid-template-columns: repeat(2,1fr);
   }
-  to {
-    transform: rotate(360deg);
+  #sidebar{
+    display: none;
+  }
+  #home{
+    width: 100vw;
   }
 }
