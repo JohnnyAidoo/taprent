@@ -1,37 +1,38 @@
-import { useState } from "react"
+import { useState , useEffect, memo} from "react"
+import { Nav } from "react-bootstrap"
+import {Link} from 'react-router-dom'
 
-function Sidebar(props) {
+const Sidebar = memo( function SidebarComp(props) {
     const primary = '#FBF5F3'
     const secondary = '#D3D4D9'
     const ctr = '#FD5200'
     const ctr2 = '#AF3800'
 
-    const [active, setactive] = useState('')
-    const toExplore = () => {
-        setactive('active')
-    }
+     
 
     return (
         <>
         <div id='sidebar' style={{position:'fixed', left:0,top:0, background:primary, width:'20vw', height:'100vh'}} >
-        <ul style={{display:'flex', flexDirection:'column',alignItems:'start', justifyContent:'space-around',height:'100%'}}>
-            <h1 >TapRent</h1>
-           <li className={props.index} > 
-            <a className="btn " href="/"><i className="fas fa-home"></i> HOME</a>
-            </li>
-           <li onClick={toExplore} href='/explore' className={props.explore} aria-label="explore"> 
-            <a className="btn " href="/explore"><i className="fa fa-compass" aria-hidden="true"></i> EXPLORE</a>
-            </li>
-           <li> 
-            <a className="btn " href="#"><i className="fas fa-message"></i> MESSAGES</a>
-            </li>
-           <li> 
-            <a className="btn " href="#"><i className="fas fa-user"></i> PROFILE</a>
-            </li>
-        </ul>
+            <ul>
+                <h1>Tap Rent</h1>
+            <Nav  id='nav' variant="tabs" >
+                <Nav.Item >
+                <Nav.Link className="text-dark"  href="/"  style={{padding:'12%'}}><i className="fa fa-home"></i> Home </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                <Nav.Link  className="text-dark"  href="/explore" style={{padding:'12%'}}> <i className="fa fa-compass"></i> Explore</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                <Nav.Link className="text-dark"  href="/mysaved" style={{padding:'12%'}}> <i className="fa fa-heart"></i> Saved</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                <Nav.Link className="text-dark"  href="/profile" style={{padding:'12%'}}> <i className="fa fa-user"></i> Profile</Nav.Link>
+                </Nav.Item>
+            </Nav>
+            </ul>
         </div>
         </>
     );
-}
+});
 
 export default Sidebar;

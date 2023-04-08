@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Sidebar from "./sidbar";
+import { Button } from 'react-bootstrap'
 
 function Header() {
 
@@ -15,8 +16,9 @@ function Header() {
                 <div id="searchBar">
                 <input placeholder="search" type="text"/><button className="btn"><i className="fa fa-search" aria-hidden="true"></i></button>
                 </div>
-                <div>
-                    <i className="fa fa-user"></i>
+                <div className="d-flex">
+                    <Button style={{height :'100%'}} variant="ouline" href='/'><i className="fa fa-upload"></i></Button>
+                    <Button style={{height :'100%'}} variant='outline' href='/profile' ><i className="fa fa-user"></i></Button>
                 </div>
             </header>
         </>

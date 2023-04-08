@@ -4,6 +4,9 @@ import { BrowserRouter as Router, Routes,Route } from 'react-router-dom'
 import Home from './Pages/home';
 import Sidebar from './component/sidbar';
 import Header from './component/header';
+import Explore from './Pages/explore';
+import SavedPage from './Pages/savedIPage';
+import Profile from './Pages/profile';
 
 function App() {
   
@@ -13,25 +16,17 @@ function App() {
   const ctr2 = '#AF3800'
   const AT = window.location.pathname
 
-  const [index , setindex] = useState('')
-  const [explore , setexplore] = useState('')
-
-  useEffect = (() =>{
-    toggle_side_bar()
-  })
-    const toggle_side_bar= () => {
-      if (AT == '/' ){
-        setindex('active')
-      }
-    }
 
   return (
     <>
-    <Header/>
-    <Sidebar index={index} explore={explore}/>
+    <Header exact/>
+    <Sidebar exact/>
     <Router>
       <Routes>
-        <Route path="/" element={<Home/>} />
+        <Route exact path="/" element={<Home/>} />
+        <Route exact path="/explore" element={<Explore/>} />
+        <Route path='/mysaved' element={<SavedPage/>}/>
+        <Route path='profile' element={<Profile/>} />
       </Routes>
     </Router>
     </>

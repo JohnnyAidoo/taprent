@@ -24,7 +24,7 @@ function CardTemp() {
             <div style={{ position:'relative',width:'100%',display:'flex', justifyContent:'center'}}>
             <ButtonGroup style={{ width:'80%', backgroundColor:ctr}} arial-label='call to action' id='button'>
                 <button style={{backgroundColor:ctr, color:'white'}} id='button' className='btn' variant='secondary'><i className='fa fa-phone'></i> Call</button>
-                <button style={{backgroundColor:ctr, color:'white'}} id='button' className='btn' variant='secondary'><i className='fa fa-message'></i> Message</button>
+                <button style={{backgroundColor:ctr, color:'white'}} id='button' className='btn' variant='secondary'><i className='fa fa-heart'></i> Save</button>
                 <button style={{backgroundColor:ctr, color:'white'}} id='button' className='btn' variant='secondary'><i className='fa fa-share'></i> Share</button>
             </ButtonGroup>
             </div>
