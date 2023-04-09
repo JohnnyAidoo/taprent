@@ -2,7 +2,7 @@ import { useState , useEffect, memo} from "react"
 import { Nav } from "react-bootstrap"
 import {Link} from 'react-router-dom'
 
-const Sidebar = memo( function SidebarComp(props) {
+const Sidebar = memo( function SidebarComp() {
     const primary = '#FBF5F3'
     const secondary = '#D3D4D9'
     const ctr = '#FD5200'

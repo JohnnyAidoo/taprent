@@ -18,7 +18,7 @@ function Header() {
                 </div>
                 <div className="d-flex">
                     <Button style={{height :'100%'}} variant="ouline" href='/'><i className="fa fa-upload"></i></Button>
-                    <Button style={{height :'100%'}} variant='outline' href='/profile' ><i className="fa fa-user"></i></Button>
+                    <Button id='profilebtn' style={{height :'100%'}} variant='outline' href='/profile' ><i className="fa fa-user"></i></Button>
                 </div>
             </header>
         </>

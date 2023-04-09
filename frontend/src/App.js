@@ -7,6 +7,7 @@ import Header from './component/header';
 import Explore from './Pages/explore';
 import SavedPage from './Pages/savedIPage';
 import Profile from './Pages/profile';
+import MobileNav from './component/mobileNav';
 
 function App() {
   
@@ -29,6 +30,7 @@ function App() {
         <Route path='profile' element={<Profile/>} />
       </Routes>
     </Router>
+<MobileNav />
     </>
   );
 }
