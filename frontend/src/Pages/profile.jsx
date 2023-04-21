@@ -1,10 +1,36 @@
+import { useEffect, useState } from 'react';
 import noImg from '../images/noImg.jpg'
 import {Card, ListGroup} from 'react-bootstrap'
+import jwt_decode from 'jwt-decode'
+import axios from 'axios';
+import Url from '../component/url';
 
 
 function Profile() {
 
-    
+ 
+    const [name, setname] = useState('')
+    const [number, setnumber] = useState('')
+
+
+    useEffect(()=>{
+        let userToken = localStorage.getItem('token')
+        const getUserData = async (token) => {
+          let uid =(jwt_decode(token).user_id)
+          axios.get(`${Url}users/${uid}`).then(res => {
+            setname(res.data.username)
+            let number = res.data.email
+            setnumber(number.replace('@mail.com',''))
+          })
+            
+        }
+        userToken ? getUserData(userToken) : window.location.pathname = '/auth'
+    },[])
+
+    const logout = () => {
+        localStorage.removeItem('token')
+        window.location.pathname = '/auth'
+    }
 
     return (
         <>
@@ -14,8 +40,9 @@ function Profile() {
                 <Card.Img style={{width: '15vw'}} src={noImg} alt={noImg} />
                 <div className='px-5'>
                     <h4> <b> Agent </b></h4>
-                    <b>Name:</b><span><p>John Wesly</p></span>
+                    <b>Name:</b><span><p>{name}</p></span>
                     <b>Joined in:</b><span><p>48 November 2025</p></span>
+                    <p>{number}</p>
                 </div>
                 </div>
                 <Card.Body>
@@ -27,6 +54,10 @@ function Profile() {
                         <ListGroup.Item className='p-4 d-flex align-items-center'>
                             <i className='fa fa-gear h-100 p-2'></i>
                             <h3>Settings</h3>
+                        </ListGroup.Item>
+                        <ListGroup.Item onClick={logout} className='p-4 d-flex align-items-center'>
+                            <i className='fa fa-gear h-100 p-2'></i>
+                            <h3>Logout</h3>
                         </ListGroup.Item>
                     </ListGroup>
                 </Card.Body>
