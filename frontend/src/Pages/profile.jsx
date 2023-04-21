@@ -3,6 +3,9 @@ import {Card, ListGroup} from 'react-bootstrap'
 
 
 function Profile() {
+
+    
+
     return (
         <>
         <div id='home' style={{position:'absolute', right:0,paddingRight:'2%',paddingLeft:'4%'}}>

@@ -1,7 +1,4 @@
 import CardTemp from "../component/cardTemp";
-import Header from "../component/header";
-import Sidebar from "../component/sidbar";
-import SmallCard from "../component/smallCard";
 
 function Home() {
     return (

@@ -80,6 +80,29 @@ li:hover{
   gap: 1%;
 }
 
+.nav .nav-link.active {
+  background-color: var(--ctr);
+}
+
+.btn-primary{
+  background-color: var(--ctr);
+}
+.btn-primary:hover{
+  background-color: var(--ctr2);
+}
+.nav-link{
+  color: var(--ctr2);
+}
+.card{
+  border-radius: 5%;
+  background-color: var(--primary); 
+}
+
+.btn-group .btn-group-sm{
+  background-color: transparent;
+  border: none;
+}
+
 @media screen and (max-width:768px) {
   #grid{
     grid-template-columns: repeat(2,1fr);

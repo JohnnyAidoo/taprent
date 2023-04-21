@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes,Route } from 'react-router-dom'
 import Home from './Pages/home';
-import Sidebar from './component/sidbar';
+import Sidebar from './component/sidebar';
 import Header from './component/header';
 import Explore from './Pages/explore';
-import SavedPage from './Pages/savedIPage';
+import SavedPage from './Pages/savedPage';
 import Profile from './Pages/profile';
 import MobileNav from './component/mobileNav';
+import AuthPage from './Pages/authPage';
 
 function App() {
   
@@ -15,7 +16,6 @@ function App() {
   const secondary = '#FBF5F3'
   const ctr = '#FD5200'
   const ctr2 = '#AF3800'
-  const AT = window.location.pathname
 
 
   return (
@@ -28,6 +28,7 @@ function App() {
         <Route exact path="/explore" element={<Explore/>} />
         <Route path='/mysaved' element={<SavedPage/>}/>
         <Route path='profile' element={<Profile/>} />
+        <Route path='auth' element={<AuthPage/>} />
       </Routes>
     </Router>
 <MobileNav />
