@@ -12,7 +12,7 @@ function Profile() {
                 <div className='px-5'>
                     <h4> <b> Agent </b></h4>
                     <b>Name:</b><span><p>John Wesly</p></span>
-                    <b>Joined in :</b><span><p>48 November 2025</p></span>
+                    <b>Joined in:</b><span><p>48 November 2025</p></span>
                 </div>
                 </div>
                 <Card.Body>
