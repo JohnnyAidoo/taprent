@@ -11,7 +11,7 @@ function Header() {
 
     return (
         <>
-            <header style={{backgroundColor: primary, borderBottom: 'solid .5px grey'}} className=" d-flex p-4 justify-content-between">
+            <header style={{ marginBottom:'2%' ,borderBottom: 'solid .5px grey'}} className=" d-flex p-4 justify-content-between">
                 <b>Tap rent</b>
                 <div id="searchBar">
                 <input placeholder="search" type="text"/><button className="btn"><i className="fa fa-search" aria-hidden="true"></i></button>

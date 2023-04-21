@@ -13,7 +13,7 @@ const Sidebar = memo( function SidebarComp() {
     return (
         <>
         <div id='sidebar' style={{position:'fixed', left:0,top:0, background:primary, width:'20vw', height:'100vh'}} >
-            <ul>
+            <ul style={{display:'flex', flexDirection:'column', justifyContent:'center',height:'100%'}}>
                 <h1>Tap Rent</h1>
             <Nav  id='nav' variant="tabs" >
                 <Nav.Item >
