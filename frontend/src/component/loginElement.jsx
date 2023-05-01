@@ -35,7 +35,7 @@ function LoginElement() {
 
     return (
         <>
-        <Card style={{minWidth:'50vw', borderRadius: '5%'}}>
+        <Card  style={{minWidth:'60vw', borderRadius: '5%'}}>
             <Card.Body>
             <Card.Title style={{textAlign:'center'}}>
                 Login To <i>Tap Rent</i>

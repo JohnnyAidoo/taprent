@@ -1,14 +1,19 @@
+import { useState } from 'react'
 import img1 from '../images/1.jpg'
 import img2 from '../images/2.jpg'
 import {Carousel, ButtonGroup, Card, Button} from 'react-bootstrap'
+import MoreDetail from '../Pages/moreDetail'
 
 function CardTemp() {
     const primary = '#FBF5F3'
     const secondary = '#D3D4D9'
     const ctr = '#FD5200'
     const ctr2 = '#AF3800'
+
+
     
     return (
+        <a href='details'>
        <Card style={{width:'100%' ,borderRadius: '5%'}}>
         <Carousel interval={null}>
             <Carousel.Item>
@@ -34,6 +39,7 @@ function CardTemp() {
             </div>
         </Card.Body>
        </Card>
+       </a>
     );
 }
 

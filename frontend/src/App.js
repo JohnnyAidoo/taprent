@@ -9,6 +9,7 @@ import SavedPage from './Pages/savedPage';
 import Profile from './Pages/profile';
 import MobileNav from './component/mobileNav';
 import AuthPage from './Pages/authPage';
+import MoreDetail from './Pages/moreDetail';
 
 function App() {
   
@@ -29,6 +30,7 @@ function App() {
         <Route path='/mysaved' element={<SavedPage/>}/>
         <Route path='profile' element={<Profile/>} />
         <Route path='auth' element={<AuthPage/>} />
+        <Route path='details' element={<MoreDetail/>} />
       </Routes>
     </Router>
 <MobileNav />

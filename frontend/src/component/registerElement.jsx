@@ -36,17 +36,16 @@ function RegisterElement() {
     onsubmit = (e)=>{
         e.preventDefault()
         let Firstname = firstname.replace(' ','_');
-
         axios.post(`${Url}register`, {
             username : (`${Firstname}_${lastname}`),
             email : (`${number}@mail.com`),
             password : (`${password}`),
-        })
+        }).then(res=>{console.log(res);})
     }
 
     return (
         <>
-        <Card onChange={check} style={{minWidth:'50vw', borderRadius: '5%'}}>
+        <Card onChange={check} style={{minWidth:'80vw', borderRadius: '5%'}}>
             <Card.Body >
             <Card.Title style={{textAlign:'center'}}>
                 Signup To <i>Tap Rent</i>
