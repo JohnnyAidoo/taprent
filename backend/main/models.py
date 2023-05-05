@@ -9,7 +9,12 @@ class Post(models.Model):
     date_posted = models.DateTimeField(auto_now_add=True)
     author = models.IntegerField()
     location = models.CharField(max_length=200)
+    features = models.CharField(max_length=2000)
     price = models.IntegerField()
     image = models.ImageField()
     image2 = models.ImageField()
     image3 = models.ImageField()
+
+class SavedItems(models.Model):
+    uid = models.IntegerField()
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
