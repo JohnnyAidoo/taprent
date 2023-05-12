@@ -1,0 +1,29 @@
+GET http://localhost:8000/users
+###
+GET http://localhost:8000/posts
+###
+
+GET http://localhost:8000/users/2
+###
+POST http://localhost:8000/users
+Content-Type: application/json
+
+{
+    "name": "Adu Kofi",
+    "phoneNumber": 123112
+}
+
+###
+POST http://localhost:8000/posts
+Content-Type: application/json
+
+
+{
+    "photos": [""],
+    "title": "test post",
+    "price": 200,
+    "description": "test post description",
+    "tags": []
+
+}
+

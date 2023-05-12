@@ -1,6 +1,22 @@
 const express = require('express');
-
+const { default: mongoose } = require('mongoose');
 const app = express();
+require('dotenv').config()
+
+//db connection
+mongoose.connect(process.env.DB_URI)
+const db = mongoose.connection
+db.on('errror', (err)=> console.error(err))
+db.once('open', ()=> console.log('Connected to db'))
+
+app.use(express.json())
+
+//users routes
+const users_routes = require('./routes/users')
+const posts_routes = require('./routes/posts')
+app.use('/users',users_routes);
+app.use('/posts', posts_routes);
+
 
 app.get('/', (req, res) =>{
     res.send(200);
@@ -9,5 +25,4 @@ app.get('/', (req, res) =>{
 
 
 
-
-app.listen(8080)
+app.listen(8000)
