@@ -18,6 +18,7 @@ router.post('/', async(req, res) =>{
     const post = new post_model({
         title: req.body.title,
         price: req.body.price,
+        location: req.body.location,
         description: req.body.description,
         tags: req.body.tags
     })

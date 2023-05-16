@@ -34,13 +34,13 @@ function RegisterElement() {
         checkpassword()
     }
     onsubmit = (e)=>{
-        e.preventDefault()
-        let Firstname = firstname.replace(' ','_');
-        axios.post(`${Url}register`, {
-            username : (`${Firstname}_${lastname}`),
-            email : (`${number}@mail.com`),
-            password : (`${password}`),
-        }).then(res=>{console.log(res);})
+        e.preventDefault();
+        axios.post(`${Url}users`, {
+            
+            name : ( firstname + ' ' + lastname),
+            phoneNumber : (number),
+            password :  password,
+        }).then(res=>{console.log(res);console.log(password)})
     }
 
     return (

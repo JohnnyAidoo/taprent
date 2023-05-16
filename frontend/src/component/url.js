@@ -1,2 +1,2 @@
-const Url = "http://localhost:8000/api/";
+const Url = "http://localhost:8000/";
 export default Url;

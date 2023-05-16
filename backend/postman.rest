@@ -10,7 +10,8 @@ Content-Type: application/json
 
 {
     "name": "Adu Kofi",
-    "phoneNumber": 123112
+    "phoneNumber": 123112,
+    "password": "password"
 }
 
 ###

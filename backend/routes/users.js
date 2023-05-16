@@ -24,6 +24,7 @@ router.post('/', async (req, res) => {
         displayPicture : req.body.displayPicture,
         phoneNumber: req.body.phoneNumber,
         location : req.body.location,
+        password : req.body.password
     })
     try{
         const newUser = await user.save()
