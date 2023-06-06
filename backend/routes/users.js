@@ -61,7 +61,7 @@ router.post('/login', (req, res) => {
         users_model.findOne({phoneNumber: req.body.phoneNumber}).then(async (user) =>{
             if(!user){
                 //user does not exist
-                res.json({ message: 'User not found'});
+                res.status(401).json({ message: 'User not found'});
             }
             if(user){
                 //user exists
@@ -69,7 +69,7 @@ router.post('/login', (req, res) => {
                 if(!match){
                     res.status(401).json({ message: 'Invalid password'});
                 }else{
-                    res.status(201).json({ message: 'Login success', userId: user.id});
+                    res.status(200).json({ message: 'Login success', userId: user.id});
                 }
             }
         })

@@ -49,7 +49,7 @@ function RegisterElement() {
             <Alert variant='success' style={{position:'absolute', top:0, width:'100%', left:0, textAlign:'center'}}>{res.message}</Alert>
             )
             
-            navigate('/profile')
+            //navigate('/profile')
             
         }).catch(err=>{});
     }
@@ -66,23 +66,23 @@ function RegisterElement() {
                     <Form.Label>
                         Enter First Name:
                     </Form.Label>
-                    <Form.Control onChange={firstnameInput} placeholder="John" />
+                    <Form.Control required onChange={firstnameInput} placeholder="John" />
                     <Form.Label>
                         Enter Last Name:
                     </Form.Label>
-                    <Form.Control onChange={lastnameInput} placeholder="Elder" />
+                    <Form.Control required onChange={lastnameInput} placeholder="Elder" />
                     <Form.Label>
                         Enter Phone Number:
                     </Form.Label>
-                    <Form.Control onChange={phoneInput} placeholder="0200000000" />
+                    <Form.Control required onChange={phoneInput} type='number' placeholder="0200000000" />
                     <Form.Label>
                         Create A Password:
                     </Form.Label>
-                    <Form.Control onChange={passwordInput} type="password" placeholder="Enter Password" />
+                    <Form.Control required onChange={passwordInput} type="password" placeholder="Enter Password" />
                     <Form.Label>
                         Re-Type Password:
                     </Form.Label>
-                    <Form.Control onChange={checkpassword} type="password" placeholder="Re-Type Password" />
+                    <Form.Control required onChange={checkpassword} type="password" placeholder="Re-Type Password" />
                     {error}
                     <br />
                     <Button type="submit" style={{width: '100%'}}>

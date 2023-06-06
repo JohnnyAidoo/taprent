@@ -15,12 +15,11 @@ function Profile() {
 
     useEffect(()=>{
         let userToken = localStorage.getItem('token')
-        const getUserData = async (token) => {
-          let uid =(jwt_decode(token).user_id)
+        const getUserData = (uid) => {
           axios.get(`${Url}users/${uid}`).then(res => {
-            setname(res.data.username)
-            let number = res.data.email
-            setnumber(number.replace('@mail.com',''))
+           console.log(res)
+           setname(res.data.name)
+           setnumber(res.data.phoneNumber)
           })
             
         }
