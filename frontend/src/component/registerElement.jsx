@@ -2,13 +2,17 @@ import axios from 'axios'
 import { useState } from "react";
 import { Alert, Button, Card, Form } from "react-bootstrap";
 import Url from './url'
+import {useNavigate} from 'react-router-dom'
 
 function RegisterElement() {
+    const navigate = useNavigate();
+
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [number, setNumber] = useState("");
     const [error, seterror] = useState("");
     const [password, setPassword] = useState("");
+    const [prompter, setprompter] = useState('');
 
     const firstnameInput = (e)=>{
         setFirstname(e.target.value);
@@ -40,11 +44,19 @@ function RegisterElement() {
             name : ( firstname + ' ' + lastname),
             phoneNumber : (number),
             password :  password,
-        }).then(res=>{console.log(res);console.log(password)})
+        }).then(res=>{
+            setprompter(
+            <Alert variant='success' style={{position:'absolute', top:0, width:'100%', left:0, textAlign:'center'}}>{res.message}</Alert>
+            )
+            
+            navigate('/profile')
+            
+        }).catch(err=>{});
     }
 
     return (
         <>
+        {prompter}
         <Card onChange={check} style={{minWidth:'80vw', borderRadius: '5%'}}>
             <Card.Body >
             <Card.Title style={{textAlign:'center'}}>

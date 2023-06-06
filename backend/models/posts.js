@@ -17,6 +17,10 @@ const post_schema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    location:{
+        type: Map,
+        required: true
+    },
     description:{
         type: String
     },

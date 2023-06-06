@@ -7,12 +7,12 @@ function LoginElement() {
     const primary = '#FBF5F3'
     const ctr = '#FD5200'
 
-    const [username, setUsername] = useState()
+    const [number, setnumber] = useState()
     const [password, setPassword] = useState()
 
 
-    const usernameInput = (e) => {
-       setUsername(e.target.value)
+    const numberInput = (e) => {
+       setnumber(e.target.value)
     }
     const passwordInput = (e) => {
         setPassword(e.target.value)
@@ -20,14 +20,13 @@ function LoginElement() {
     
     onsubmit = ( (event)=>{
         event.preventDefault()
-        let newusername = username.replace(/ /g,'_')
 
-        axios.post(`${Url}login/`,{
-            username: newusername,
+        axios.post(`${Url}users/login`,{
+            number: number,
             password: password 
             }).then((res)=>{
+                console.log(res)
                 localStorage.setItem('token', res.data.access);
-                window.location.pathname = '/'
             }).catch((err)=>{console.log(err)})
     })
 
@@ -42,9 +41,9 @@ function LoginElement() {
             </Card.Title>
                 <Form>
                     <Form.Label >
-                        Username:
+                        number:
                     </Form.Label>
-                    <Form.Control onChange={usernameInput} placeholder="Enter User Name" />
+                    <Form.Control onChange={numberInput} placeholder="Enter Number" />
                     <Form.Label>
                         Password:
                     </Form.Label>

@@ -14,7 +14,8 @@ const users_schema = new mongoose.Schema({
     },
     phoneNumber: {
         type: Number,
-        required : true
+        required : true,
+        unique : true
     },
     location: {
         type : String,
