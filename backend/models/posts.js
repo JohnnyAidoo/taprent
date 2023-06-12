@@ -26,8 +26,11 @@ const post_schema = new mongoose.Schema({
     },
     tags:{
         type: Array
+    },
+    author:{ 
+        type: String,
+        required : true
     }
-
 
 })
 

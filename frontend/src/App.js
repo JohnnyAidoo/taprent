@@ -22,7 +22,6 @@ function App() {
   return (
     <>
     <Header exact/>
-    <Sidebar exact/>
     <Router>
       <Routes>
         <Route exact path="/" element={<Home/>} />

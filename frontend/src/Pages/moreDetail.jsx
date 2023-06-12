@@ -4,6 +4,7 @@ import img1 from '../images/1.jpg'
 import img2 from '../images/2.jpg'
 import map from '../images/map.jpg'
 import CardTemp from "../component/cardTemp";
+import Sidebar from "../component/sidebar";
 
 
 function MoreDetail() {
@@ -16,6 +17,7 @@ function MoreDetail() {
 
     return (
         <>
+        <Sidebar />
         <div id="home" style={{position:'absolute', right:0,paddingRight:'2%',paddingLeft:'4%'}}>
         <div style={{paddingBottom:'2%'}}>
             

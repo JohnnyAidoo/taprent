@@ -4,6 +4,7 @@ import {Card, ListGroup} from 'react-bootstrap'
 import jwt_decode from 'jwt-decode'
 import axios from 'axios';
 import Url from '../component/url';
+import Sidebar from '../component/sidebar';
 
 
 function Profile() {
@@ -33,6 +34,7 @@ function Profile() {
 
     return (
         <>
+        <Sidebar profile={true} />
         <div id='home' style={{position:'absolute', right:0,paddingRight:'2%',paddingLeft:'4%'}}>
             <Card>
                 <div className='d-flex px-5 justify-content-center align-items-center'>

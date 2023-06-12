@@ -2,7 +2,9 @@ import { useState , useEffect, memo} from "react"
 import { Nav } from "react-bootstrap"
 import {Link} from 'react-router-dom'
 
-const Sidebar = memo( function SidebarComp() {
+const Sidebar = (props) => {
+
+
     const primary = '#FBF5F3'
     const secondary = '#D3D4D9'
     const ctr = '#FD5200'
@@ -15,24 +17,24 @@ const Sidebar = memo( function SidebarComp() {
         <div id='sidebar' style={{position:'fixed', left:0,top:0, background:primary, width:'20vw', height:'100vh'}} >
             <ul style={{display:'flex', flexDirection:'column', justifyContent:'center',height:'100%'}}>
                 <h1>Tap Rent</h1>
-            <Nav  id='nav' variant="tabs" >
+            <Nav  id='nav' variant="pills" >
                 <Nav.Item >
-                <Nav.Link className="text-dark"  href="/"  style={{padding:'12%'}}><i className="fa fa-home"></i> Home </Nav.Link>
+                <Nav.Link className="text-dark" active={props.home} href="/"  style={{padding:'12%'}}><i className="fa fa-home"></i> Home </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                <Nav.Link  className="text-dark"  href="/explore" style={{padding:'12%'}}> <i className="fa fa-compass"></i> Explore</Nav.Link>
+                <Nav.Link  className="text-dark" active={props.explore} href="/explore" style={{padding:'12%'}}> <i className="fa fa-compass"></i> Explore</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                <Nav.Link className="text-dark"  href="/mysaved" style={{padding:'12%'}}> <i className="fa fa-heart"></i> Saved</Nav.Link>
+                <Nav.Link className="text-dark" active={props.saved} href="/mysaved" style={{padding:'12%'}}> <i className="fa fa-heart"></i> Saved</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                <Nav.Link className="text-dark"  href="/profile" style={{padding:'12%'}}> <i className="fa fa-user"></i> Profile</Nav.Link>
+                <Nav.Link className="text-dark" active={props.profile} href="/profile" style={{padding:'12%'}}> <i className="fa fa-user"></i> Profile</Nav.Link>
                 </Nav.Item>
             </Nav>
             </ul>
         </div>
         </>
     );
-});
+};
 
 export default Sidebar;
