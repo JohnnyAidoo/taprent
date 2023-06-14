@@ -60,7 +60,7 @@ const handleUpload = async (event) => {
           price: price,
           location: location,
           description: description,
-          photos: imagesUrls,
+          photos: imageUrls,
       },).then((res) =>{
           console.log(res)
           console.log(imageUrls)
