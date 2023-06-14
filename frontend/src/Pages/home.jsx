@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import CardTemp from "../component/cardTemp";
 import axios from 'axios'
 import Sidebar from "../component/sidebar";
+import {CloudinaryContext, Image} from 'cloudinary-react'
 
 function Home() {
 
@@ -22,7 +23,7 @@ function Home() {
             <div id="grid">
                 { posts.map((post) =>(
                     <CardTemp
-                    key={post.title}
+                    key={post._id}
                     title={post.title}
                     location={post.location}
                     />

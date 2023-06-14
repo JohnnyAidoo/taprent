@@ -1,6 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const post_model = require('../models/posts')
+const cloudinary = require('cloudinary').v2
+
+
+
+cloudinary.config({ 
+    cloud_name: 'djpaffvsj', 
+    api_key: '251668964498143', 
+    api_secret: '-kP4CJOOxsZwlm_IZ-EZuTBl79s' 
+});
+
 
 //get all posts
 
@@ -13,13 +23,17 @@ router.get('/', async(req, res) =>{
     }
 })
 
+
+
 //create a post
 router.post('/', async(req, res) =>{
+
     const post = new post_model({
         title: req.body.title,
         price: req.body.price,
         location: req.body.location,
         description: req.body.description,
+        photos: req.body.photos,
         tags: req.body.tags
     })
 

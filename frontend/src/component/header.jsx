@@ -10,23 +10,63 @@ function Header() {
     const [price, setprice] = useState('');
     const [location, setlocation] = useState('');
     const [description, setdescription] = useState('');
+    const [imageUrls, setimageUrls] = useState([]);
 
     const primary = '#FBF5F3'
     const secondary = '#FBF5F3'
     const ctr = '#FD5200'
     const ctr2 = '#AF3800'
 
+  
+////////////////////////////////////////////////////////////////
 
-    onsubmit = (e) => {
-        e.preventDefault()
-        axios.post(`${Url}posts`,{
-            title: title,
-            price: price,
-            location: location,
-            description: description
-        }).then((res) =>{
-            console.log(res)
-        }).catch(err => console.error(err))
+ 
+const handleUpload = async (event) => {
+    const files = event.target.files;
+
+    // Create an array to store the uploaded image URLs
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+
+      // Create a new FormData object
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', 'taprent');
+
+      try {
+        // Make the POST request to Cloudinary
+        const response = await axios.post('https://api.cloudinary.com/v1_1/djpaffvsj/image/upload', formData);
+
+        // Retrieve the URL of the uploaded image
+        const imageUrl = response.data.url;
+        setimageUrls([...imageUrls, imageUrl]);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    // Log the image URLs
+    imageUrls.forEach((url, index) => {
+      console.log(`Image ${index + 1}: ${url}`);
+    });
+  };
+
+  
+  onsubmit = async (e) => {
+      e.preventDefault()
+      axios.post(`${Url}posts`,{
+          title: title,
+          price: price,
+          location: location,
+          description: description,
+          photos: imagesUrls,
+      },).then((res) =>{
+          console.log(res)
+          console.log(imageUrls)
+      }).catch(err => console.error(err))
+        console.log(imageUrls)
+        
     }
 
     return (
@@ -46,14 +86,14 @@ function Header() {
                 </Modal.Header>
                 <Modal.Body>
                     <Form >
-                        <Form.Control type="file" />
-                        <Form.Control type="file" />
-                        <Form.Control style={{marginBottom:'2%'}} type="file" />
+                        <Form.Control onChange={handleUpload} type="file" />
+                        <Form.Control onChange={handleUpload} type="file" />
+                        <Form.Control onChange={handleUpload} style={{marginBottom:'2%'}} type="file" />
                         
                         <Form.Control placeholder="Title" style={{marginBottom:'2%'}} onChange={(e) =>{settitle(e.target.value)}}/>
                         <div style={{width:'100%',display:"flex", justifyContent:'space-evenly'}}>
                             <Form.Control style={{marginBottom:'2%'}} type="number" placeholder="Price" onChange={(e) =>{setprice(e.target.value)}} />
-                            <Form.Control style={{marginBottom:'2%'}} placeholder="/Montly" disabled />
+                            <Form.Control style={{marginBottom:'2%'}} placeholder="Ghs/Montly" disabled />
                         </div>
                         <Form.Control style={{marginBottom:'2%'}} placeholder="Location" onChange={(e) =>{setlocation(e.target.value)}} />
                         <Form.Control style={{marginBottom:'2%'}} placeholder="discription" size="lg" as="textarea" onChange={(e) =>{setdescription(e.target.value)}}/>

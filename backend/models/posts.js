@@ -18,7 +18,7 @@ const post_schema = new mongoose.Schema({
         required: true
     },
     location:{
-        type: Map,
+        type: String,
         required: true
     },
     description:{
@@ -28,8 +28,7 @@ const post_schema = new mongoose.Schema({
         type: Array
     },
     author:{ 
-        type: String,
-        required : true
+        type: String
     }
 
 })

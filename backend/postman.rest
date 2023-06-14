@@ -25,7 +25,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:8000/posts
+POST http://localhost:8000/posts/c
 Content-Type: application/json
 
 
@@ -34,7 +34,8 @@ Content-Type: application/json
     "title": "test post",
     "price": 200,
     "description": "test post description",
-    "tags": []
-
+    "tags": [],
+    "author": "1",
+    "location": ""
 }
 
