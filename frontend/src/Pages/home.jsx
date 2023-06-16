@@ -24,6 +24,7 @@ function Home() {
                 { posts.map((post) =>(
                     <CardTemp
                     key={post._id}
+                    photos={post.photos} 
                     title={post.title}
                     location={post.location}
                     />

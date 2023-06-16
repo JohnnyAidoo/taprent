@@ -9,14 +9,14 @@ function CardTemp(props) {
     const secondary = '#D3D4D9'
     const ctr = '#FD5200'
     const ctr2 = '#AF3800'
-
+    let photoarray = props.photos
 
     
     return (
         <a href='details'>
        <Card style={{width:'100%' ,borderRadius: '5%'}}>
         <Carousel interval={null}>
-            <Carousel.Item>
+            {/* <Carousel.Item>
                 <Card.Img variant='top' src={img1}  style={{borderRadius: '5%'}}/>
             </Carousel.Item> 
             <Carousel.Item>
@@ -24,12 +24,17 @@ function CardTemp(props) {
             </Carousel.Item>
             <Carousel.Item>
                 <Card.Img variant='top' src={img2}  style={{borderRadius: '5%'}} />
-            </Carousel.Item>
+            </Carousel.Item> */}
+            {photoarray.map((photo) =>(
+                <Carousel.Item>
+                    <Card.Img variant='top' src={photo}  style={{borderRadius: '5%'}}/>
+                </Carousel.Item>
+            ))}
             
         </Carousel>
         <Card.Body>
             <Card.Title>{props.title}</Card.Title>
-            <Card.Text>TAKORADI,ANJI</Card.Text>
+            <Card.Text>{props.location}</Card.Text>
             <div style={{ position:'relative',width:'100%',display:'flex', justifyContent:'center'}}>
             <ButtonGroup style={{ width:'80%', backgroundColor:ctr}} arial-label='call to action' size='sm'>
                 <Button href='#' style={{backgroundColor:ctr, color:'white'}}  variant='primary'><i className='fa fa-phone'></i> Call</Button>

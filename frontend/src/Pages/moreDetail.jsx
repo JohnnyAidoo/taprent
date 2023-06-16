@@ -80,7 +80,7 @@ function MoreDetail() {
                 <Card.Img  src={map} />
             </Card>
             <br />
-            <h3><i class="fas fa-directions"></i>Anaji,Takoradi</h3>
+            <h3><i className="fas fa-directions"></i>Anaji,Takoradi</h3>
         </Container>
         <br />
         <hr />
@@ -109,17 +109,7 @@ function MoreDetail() {
         <hr />
 
         <p style={{color:'grey', fontWeight:'bold'}}>Related Listing</p>
-        <div id="grid">
-              <CardTemp/>
-              <CardTemp/>
-              <CardTemp/>
-              <CardTemp/>
-              <CardTemp/>
-              <CardTemp/>
-              <CardTemp/>
-              <CardTemp/>
-              <CardTemp/>
-            </div>
+        
         </div>
         </>
     );

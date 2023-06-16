@@ -11,6 +11,7 @@ function Header() {
     const [location, setlocation] = useState('');
     const [description, setdescription] = useState('');
     const [imageUrls, setimageUrls] = useState([]);
+    const [features, setFeatures] = useState([]);
 
     const primary = '#FBF5F3'
     const secondary = '#FBF5F3'
@@ -18,7 +19,15 @@ function Header() {
     const ctr2 = '#AF3800'
 
   
+    const list = [1,2,3,4,5,6,7,8,9,10]
+
 ////////////////////////////////////////////////////////////////
+
+    const addToList = (e) =>{
+        let name = e.target.name
+        console.log(e.target.checked)
+        e.target.checked ? setFeatures([...features,name]) : features.pop()
+    }
 
  
 const handleUpload = async (event) => {
@@ -59,6 +68,7 @@ const handleUpload = async (event) => {
           title: title,
           price: price,
           location: location,
+          features: features,
           description: description,
           photos: imageUrls,
       },).then((res) =>{
@@ -75,6 +85,7 @@ const handleUpload = async (event) => {
             {/* modal for upload */}
             
             <Modal
+            onChange={() => {console.log(features);}}
             centered
             backdrop="static"
             size="lg"
@@ -82,7 +93,7 @@ const handleUpload = async (event) => {
             >
                 <Modal.Header>
                     Uplaod For Rent
-                    <CloseButton onClick={() => {setpopup(false)}}  />
+                    <CloseButton onClick={() => {setpopup(false);setFeatures([])}}  />
                 </Modal.Header>
                 <Modal.Body>
                     <Form >
@@ -96,6 +107,21 @@ const handleUpload = async (event) => {
                             <Form.Control style={{marginBottom:'2%'}} placeholder="Ghs/Montly" disabled />
                         </div>
                         <Form.Control style={{marginBottom:'2%'}} placeholder="Location" onChange={(e) =>{setlocation(e.target.value)}} />
+                        <div className="d-flex mb-2">
+                            <Form.Select >
+                                <option>Number of Bed rooms</option>
+                                {list.map((numberOfRoom) =>(
+                                    <option>{numberOfRoom}</option>
+                                ))}
+                            </Form.Select>
+                            <Form.Select >
+                                <option>Number of Bath rooms</option>
+                                {list.map((numberOfRoom) =>(
+                                    <option>{numberOfRoom}</option>
+                                ))}
+                            </Form.Select>
+                        </div>
+
                         <Form.Control style={{marginBottom:'2%'}} placeholder="discription" size="lg" as="textarea" onChange={(e) =>{setdescription(e.target.value)}}/>
                         
                         <Modal.Footer>

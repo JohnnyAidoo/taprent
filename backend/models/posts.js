@@ -17,9 +17,8 @@ const post_schema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    location:{
-        type: String,
-        required: true
+    features:{
+        type: Array,
     },
     description:{
         type: String
