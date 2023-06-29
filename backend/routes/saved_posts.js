@@ -4,7 +4,7 @@ const saved_post_model = require('../models/savedPost')
 
 
 //get saved post
-router.get('/:uid/', (req, res) => {
+router.get('/', (req, res) => {
     const uid = req.params.uid;
 
     saved_post_model.find({uid: uid}).then((response)=> {
@@ -28,3 +28,5 @@ router.post('/' ,async (req, res)=>{
         res.status(400).json({message:err.message})
     }
 })
+
+module.exports = router

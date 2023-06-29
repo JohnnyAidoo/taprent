@@ -1,6 +1,6 @@
 GET http://localhost:8000/users/
 ###
-GET http://localhost:8000/posts/
+GET http://localhost:8000/saved/
 ###
 
 GET http://localhost:8000/users/647f5461d931f01b91004bdf

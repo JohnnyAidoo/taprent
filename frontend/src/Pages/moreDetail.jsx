@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { useParams ,} from "react-router-dom";
 import axios from "axios";
 import Url from "../component/url";
+import { Avatar } from "@mui/material";
 
 
 function MoreDetail() {
@@ -144,9 +145,9 @@ function MoreDetail() {
         </Container>
         <hr />
         <p style={{color:'grey', fontWeight:'bold'}}>Agent Information</p>
-        <Container fluid >
-            <Row style={{textAlign:'center'}}>
-                <Col><img style={{borderRadius:'50%'}} src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" /></Col>
+        <Container fluid style={{display:'flex', justifyContent:'center'}} >
+            <Row style={{textAlign:'center',display:'flex', width:'70%'}}>
+                <Col><Avatar style={{width:150, height:150}} /></Col>
                 <Col >
                 <b>Agent Something</b>
                 <br />
