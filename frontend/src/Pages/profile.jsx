@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import noImg from '../images/noImg.jpg'
-import {Card, ListGroup} from 'react-bootstrap'
-import jwt_decode from 'jwt-decode'
 import axios from 'axios';
 import Url from '../component/url';
 import Sidebar from '../component/sidebar';
+import Home from './home';
+import {Card, Avatar, CardContent, CardMedia, Typography, Box} from '@mui/material'
 
 
 function Profile() {
@@ -15,20 +15,21 @@ function Profile() {
 
 
     useEffect(()=>{
-        let userToken = localStorage.getItem('token')
+        let userid = localStorage.getItem('userid')
         const getUserData = (uid) => {
           axios.get(`${Url}users/${uid}`).then(res => {
-           console.log(res)
+           localStorage.setItem('tel', res.data.phoneNumber)
            setname(res.data.name)
            setnumber(res.data.phoneNumber)
           })
             
         }
-        userToken ? getUserData(userToken) : window.location.pathname = '/auth'
+        userid ? getUserData(userid) : window.location.pathname = '/auth'
     },[])
 
     const logout = () => {
-        localStorage.removeItem('token')
+        localStorage.removeItem('userid')
+        localStorage.removeItem('tel')
         window.location.pathname = '/auth'
     }
 
@@ -36,7 +37,7 @@ function Profile() {
         <>
         <Sidebar profile={true} />
         <div id='home' style={{position:'absolute', right:0,paddingRight:'2%',paddingLeft:'4%'}}>
-            <Card>
+            {/* <Card>
                 <div className='d-flex px-5 justify-content-center align-items-center'>
                 <Card.Img style={{width: '15vw'}} src={noImg} alt={noImg} />
                 <div className='px-5'>
@@ -62,8 +63,28 @@ function Profile() {
                         </ListGroup.Item>
                     </ListGroup>
                 </Card.Body>
+            </Card> */}
+            <Card sx={{display:'flex'}} >
+                <Box sx={{width:'40%',display:'flex', justifyContent:'center', alignItems:'center'}}>
+                    <Avatar  alt={name} src={''} sx={{width:150, height:150}} />
+                </Box>
+                <CardContent sx={{width:'70%'}} >
+                    <h4 style={{fontSize:30, fontWeight:'bold'}}>
+                        {name}
+                    </h4>
+                    <Typography variant='body1'>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis enim veritatis quis iusto sed officiis, rem dolores libero eveniet omnis sunt cupiditate explicabo
+                         neque voluptas reprehenderit blanditiis quisquam. Dolores, blanditiis?
+                    </Typography>
+                </CardContent>
             </Card>
+            <br />
+            <br />
+            <br />
+            <h1>post</h1>
+            <Home />
         </div>
+        
         </>
     );
 }

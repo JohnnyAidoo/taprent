@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { Button, ButtonGroup, CloseButton, Form, Modal, ModalBody } from 'react-bootstrap'
 import Url from "./url";
 import axios from "axios"
+import { redirect } from "react-router-dom";
+import logo from '../images/logo.png';
+
 
 function Header() {
 
@@ -12,16 +15,21 @@ function Header() {
     const [description, setdescription] = useState('');
     const [imageUrls, setimageUrls] = useState([]);
     const [features, setFeatures] = useState([]);
+    const [author, setauthor] = useState();
 
     const primary = '#FBF5F3'
     const secondary = '#FBF5F3'
     const ctr = '#FD5200'
     const ctr2 = '#AF3800'
 
-  
     const list = [1,2,3,4,5,6,7,8,9,10]
 
 ////////////////////////////////////////////////////////////////
+
+    useEffect(() =>{
+        let userid = localStorage.getItem('userid')
+        userid ? setauthor(userid) : setauthor('')
+    })
 
     const addToList = (e) =>{
         let name = e.target.name
@@ -64,6 +72,8 @@ const handleUpload = async (event) => {
   
   onsubmit = async (e) => {
       e.preventDefault()
+      let uid = await localStorage.getItem('userid')
+      let telephone = await localStorage.getItem('tel')
       axios.post(`${Url}posts`,{
           title: title,
           price: price,
@@ -71,9 +81,11 @@ const handleUpload = async (event) => {
           features: features,
           description: description,
           photos: imageUrls,
+          telephone:telephone,
+          author :uid
       },).then((res) =>{
-          console.log(res)
-          console.log(imageUrls)
+          setpopup(false)
+          redirect('/')
       }).catch(err => console.error(err))
         console.log(imageUrls)
         
@@ -85,7 +97,6 @@ const handleUpload = async (event) => {
             {/* modal for upload */}
             
             <Modal
-            onChange={() => {console.log(features);}}
             centered
             backdrop="static"
             size="lg"
@@ -111,7 +122,9 @@ const handleUpload = async (event) => {
                             <Form.Select >
                                 <option>Number of Bed rooms</option>
                                 {list.map((numberOfRoom) =>(
-                                    <option>{numberOfRoom}</option>
+                                    <option>
+                                        {numberOfRoom}
+                                    </option>
                                 ))}
                             </Form.Select>
                             <Form.Select >
@@ -122,7 +135,7 @@ const handleUpload = async (event) => {
                             </Form.Select>
                         </div>
 
-                        <Form.Control style={{marginBottom:'2%'}} placeholder="discription" size="lg" as="textarea" onChange={(e) =>{setdescription(e.target.value)}}/>
+                        <Form.Control style={{marginBottom:'2%', minHeight:'30vh'}} placeholder="discription" size="lg" as="textarea" onChange={(e) =>{setdescription(e.target.value)}}/>
                         
                         <Modal.Footer>
                         <ButtonGroup>
@@ -136,8 +149,10 @@ const handleUpload = async (event) => {
 
             {/* header */}
 
-            <header style={{ marginBottom:'2%' ,borderBottom: 'solid .5px grey'}} className=" d-flex p-4 justify-content-between">
-                <b>Tap rent</b>
+            <header style={{ marginBottom:'2%'}} className=" d-flex p-4 justify-content-between">
+                <a href="/" style={{display:'flex', width:'15%'}}>
+                    <img id="headimg" src={logo} alt="" style={{aspectRatio:1/1, width:'80%'}} />
+                </a>
                 <div id="searchBar">
                 <input placeholder="search" type="text"/><button className="btn"><i className="fa fa-search" aria-hidden="true"></i></button>
                 </div>

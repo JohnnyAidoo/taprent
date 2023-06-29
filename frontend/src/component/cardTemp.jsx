@@ -13,7 +13,7 @@ function CardTemp(props) {
 
     
     return (
-        <a href='details'>
+        <a href={`details/${props.id}`}>
        <Card style={{width:'100%' ,borderRadius: '5%'}}>
         <Carousel interval={null}>
             {/* <Carousel.Item>
@@ -27,19 +27,21 @@ function CardTemp(props) {
             </Carousel.Item> */}
             {photoarray.map((photo) =>(
                 <Carousel.Item>
-                    <Card.Img variant='top' src={photo}  style={{borderRadius: '5%'}}/>
+                    <Card.Img variant='top' src={photo} 
+                    key={photo} style={{borderRadius: '5%', aspectRatio:16/10, }}/>
                 </Carousel.Item>
             ))}
             
         </Carousel>
         <Card.Body>
             <Card.Title>{props.title}</Card.Title>
-            <Card.Text>{props.location}</Card.Text>
+            <Card.Text><i className='fa fa-location' 
+            style={{padding:'2%',color:ctr, fontSize:15}}></i>{props.location}</Card.Text>
             <div style={{ position:'relative',width:'100%',display:'flex', justifyContent:'center'}}>
             <ButtonGroup style={{ width:'80%', backgroundColor:ctr}} arial-label='call to action' size='sm'>
-                <Button href='#' style={{backgroundColor:ctr, color:'white'}}  variant='primary'><i className='fa fa-phone'></i> Call</Button>
-                <Button href='#' style={{backgroundColor:ctr, color:'white'}}  variant='primary'><i className='fa fa-heart'></i> Save</Button>
-                <Button href='#' style={{backgroundColor:ctr, color:'white'}}  variant='primary'><i className='fa fa-share'></i> Share</Button>
+                <Button href={`tel:${props.tel}`} style={{backgroundColor:ctr, color:'white'}}  variant='primary'><i className='fa fa-phone'></i> Call</Button>
+                <Button href='' style={{backgroundColor:ctr, color:'white'}}  variant='primary'><i className='fa fa-heart'></i> Save</Button>
+                <Button href={`details/${props.id}`}  style={{backgroundColor:ctr, color:'white'}}  variant='primary'><i className='fa fa-share'></i> Share</Button>
             </ButtonGroup>
             </div>
         </Card.Body>

@@ -46,7 +46,7 @@ a{
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  height: 80vh;
+  height: 50%;
 }
 #mobileNav{
   display: none;
@@ -64,11 +64,8 @@ li:hover{
   background-color: #D3D4D9;
 }
 .active{
-  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-weight: bold;
+  font-size: larger;
 }
 #button:hover{
   background-color: var(--ctr2);
@@ -80,6 +77,9 @@ li:hover{
   gap: 1%;
 }
 
+.nav-item:hover{
+  background-color: whitesmoke;
+}
 .nav .nav-link.active {
   background-color: var(--secondary);
 }
@@ -102,12 +102,26 @@ li:hover{
   background-color: transparent;
   border: none;
 }
+#col{
+  background-image: url(images/logo.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#headimg{
+  display: none;
+}
 
 @media screen and (max-width:768px) {
   #grid{
     grid-template-columns: repeat(2,1fr);
   }
   #sidebar{
+    display: none;
+  }
+  #headimg{
+    display: block;
+  }
+  #col{
     display: none;
   }
   #home{
@@ -128,6 +142,7 @@ li:hover{
   #profilebtn{
     display: none;
   }
+ 
 }
 @media screen and (max-width:500px) {
   #grid{

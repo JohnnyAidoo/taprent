@@ -27,7 +27,17 @@ const post_schema = new mongoose.Schema({
         type: Array
     },
     author:{ 
-        type: String
+        type: String,
+        required: true
+    },
+    telephone:{
+        type: String,
+        
+    },
+    date_published:{
+        type: Date,
+        required: true,
+        default: Date.now()
     }
 
 })

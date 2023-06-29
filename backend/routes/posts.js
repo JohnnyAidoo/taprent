@@ -16,7 +16,7 @@ cloudinary.config({
 
 router.get('/', async(req, res) =>{
     try{
-        const posts = await post_model.find()
+        const posts = await post_model.find().sort({'date_published': -1})
         res.json(posts)
     }catch(err){
         res.status(500).json({message:err.message});
@@ -35,7 +35,9 @@ router.post('/', async(req, res) =>{
         features: req.body.features,
         description: req.body.description,
         photos: req.body.photos,
-        tags: req.body.tags
+        tags: req.body.tags,
+        author: req.body.author,
+        telephone : req.body.telephone
     })
 
     try{
@@ -51,6 +53,7 @@ router.post('/', async(req, res) =>{
 router.get('/:id', async(req, res) =>{
     try{
         const post = await post_model.findById(req.params.id)
+        res.status(200).json(post)
     }catch(err){
         res.status(500).json({message:err.message});
     }

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import CardTemp from "../component/cardTemp";
 import axios from 'axios'
 import Sidebar from "../component/sidebar";
-import {CloudinaryContext, Image} from 'cloudinary-react'
 
 function Home() {
 
@@ -13,7 +12,7 @@ function Home() {
             setposts(res.data);
         })
 
-    },[])
+    })
 
     return (
         <>
@@ -24,9 +23,11 @@ function Home() {
                 { posts.map((post) =>(
                     <CardTemp
                     key={post._id}
+                    id={post._id}
                     photos={post.photos} 
                     title={post.title}
                     location={post.location}
+                    tel ={post.telephone}
                     />
                 ))}
             </div>

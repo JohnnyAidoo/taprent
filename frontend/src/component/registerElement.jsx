@@ -1,8 +1,10 @@
 import axios from 'axios'
 import { useState } from "react";
-import { Alert, Button, Card, Form } from "react-bootstrap";
+import { Alert, Button, Col, Form , Modal, Row, Spinner} from "react-bootstrap";
 import Url from './url'
 import {useNavigate} from 'react-router-dom'
+
+
 
 function RegisterElement() {
     const navigate = useNavigate();
@@ -34,10 +36,7 @@ function RegisterElement() {
             seterror(<Alert variant='danger'>Password Does Not Match</Alert>)
         }else{seterror('')}
     }
-    const check = (e)=>{
-        checkpassword()
-    }
-    onsubmit = (e)=>{
+    onsubmit =  (e) => {
         e.preventDefault();
         axios.post(`${Url}users`, {
             
@@ -45,11 +44,18 @@ function RegisterElement() {
             phoneNumber : (number),
             password :  password,
         }).then(res=>{
+            setprompter(<Modal centered>
+                <Spinner variant='warning' />
+                <p>Loading...</p>
+            </Modal>)
+            localStorage.setItem('userid', res.data._id);
             setprompter(
             <Alert variant='success' style={{position:'absolute', top:0, width:'100%', left:0, textAlign:'center'}}>{res.message}</Alert>
             )
-            
-            //navigate('/profile')
+            // uid ? navigate('/') : setprompter(<Modal size='lg' centered backdrop='static'>
+            //     <Modal.Title>Loading</Modal.Title>
+            // </Modal>)
+            navigate('/profile')
             
         }).catch(err=>{});
     }
@@ -57,7 +63,7 @@ function RegisterElement() {
     return (
         <>
         {prompter}
-        <Card onChange={check} style={{minWidth:'80vw', borderRadius: '5%'}}>
+        {/* <Card onChange={check} style={{minWidth:'80vw', borderRadius: '5%'}}>
             <Card.Body >
             <Card.Title style={{textAlign:'center'}}>
                 Signup To <i>Tap Rent</i>
@@ -90,7 +96,43 @@ function RegisterElement() {
                     </Button>
                 </Form>
             </Card.Body>
-        </Card>
+        </Card> */}
+ 
+        <div  onChange={()=>{setprompter(<></>)}} style={{width:'100vw', height:'90vh',display:'flex',justifyContent:'space-around', alignItems:'center'}}>
+            <Row className='w-75'>
+                <Col style={{width:'40%', backgroundColor:'white', border:'grey solid 0.3px', padding:50, borderRadius:20}} >
+                <Form>
+                        <Form.Label>
+                            Enter First Name:
+                        </Form.Label>
+                        <Form.Control required onChange={firstnameInput} placeholder="John" />
+                        <Form.Label>
+                            Enter Last Name:
+                        </Form.Label>
+                        <Form.Control required onChange={lastnameInput} placeholder="Elder" />
+                        <Form.Label>
+                            Enter Phone Number:
+                        </Form.Label>
+                        <Form.Control required onChange={phoneInput} type='number' placeholder="0200000000" />
+                        <Form.Label>
+                            Create A Password:
+                        </Form.Label>
+                        <Form.Control required onChange={passwordInput} type="password" placeholder="Enter Password" />
+                        <Form.Label>
+                            Re-Type Password:
+                        </Form.Label>
+                        <Form.Control required onChange={checkpassword} type="password" placeholder="Re-Type Password" />
+                        {error}
+                        <br />
+                        <Button type="submit" style={{width: '100%',}}>
+                            Sign Up
+                        </Button>
+                    </Form>
+                </Col>
+                <Col id='col' style={{width:'40%',marginLeft:100}}>
+                </Col>
+            </Row>
+        </div>
         </>
     );
 }

@@ -1,12 +1,10 @@
-import {Alert, Button, Card, Form } from "react-bootstrap";
+import {Alert, Button, Col, Form, Row } from "react-bootstrap";
 import axios from "axios";
 import { useState } from "react";
 import Url from "./url";
 import { useNavigate } from 'react-router-dom'
 
 function LoginElement() {
-    const primary = '#FBF5F3'
-    const ctr = '#FD5200'
 
     const [prompter, setprompter] = useState('');
     const [number, setnumber] = useState('')
@@ -37,8 +35,8 @@ function LoginElement() {
                     <Alert variant={variant} style={{position:'absolute', top:0, width:'100%', left:0, textAlign:'center'}}>{message}</Alert>
                 )
                 if(res.status === 200){
-                    localStorage.setItem('token', res.data.userId)
-                    navigate('/')
+                    localStorage.setItem('userid', res.data.userId)
+                    navigate('/profile')
                 }
             }).catch((err)=>{console.log(err)
                 setprompter(
@@ -52,27 +50,28 @@ function LoginElement() {
     return (
         <>
         {prompter}
-        <Card  style={{minWidth:'60vw', borderRadius: '5%'}}>
-            <Card.Body>
-            <Card.Title style={{textAlign:'center'}}>
-                Login To <i>Tap Rent</i>
-            </Card.Title>
-                <Form>
-                    <Form.Label >
-                        number:
-                    </Form.Label>
-                    <Form.Control required type="number" onChange={numberInput} placeholder="Enter Number" />
-                    <Form.Label>
-                        Password:
-                    </Form.Label>
-                    <Form.Control required onChange={passwordInput} type="password" placeholder="Enter Password" />
-                    <br />
-                    <Button type="submit" style={{width: '100%'}}>
-                        Login
-                    </Button>
-                </Form>
-            </Card.Body>
-        </Card>
+        <div  onChange={()=>{setprompter(<></>)}} style={{width:'100vw', height:'90vh',display:'flex',justifyContent:'center', alignItems:'center'}}>
+            <Row className="w-75"> 
+                <Col id='col' style={{width:'40%',marginRight:100, aspectRatio:9/10}}>
+                </Col>
+                <Col style={{display:'flex',flexDirection:'column', justifyContent:'center'}} >
+                    <Form style={{backgroundcolor:'white', border:'grey solid 0.3px', padding:50, borderRadius:20}}>
+                            <Form.Label >
+                                number:
+                            </Form.Label>
+                            <Form.Control required type="number" onChange={numberInput} placeholder="Enter Number" />
+                            <Form.Label>
+                                Password:
+                            </Form.Label>
+                            <Form.Control required onChange={passwordInput} type="password" placeholder="Enter Password" />
+                            <br />
+                            <Button type="submit" style={{width: '100%'}}>
+                                Login
+                            </Button>
+                        </Form>
+                </Col>
+            </Row>
+        </div>
         </>
     );
 }

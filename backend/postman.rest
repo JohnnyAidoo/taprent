@@ -1,6 +1,6 @@
 GET http://localhost:8000/users/
 ###
-GET http://localhost:8000/posts
+GET http://localhost:8000/posts/
 ###
 
 GET http://localhost:8000/users/647f5461d931f01b91004bdf
@@ -25,7 +25,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:8000/posts/c
+POST http://localhost:8000/posts/
 Content-Type: application/json
 
 
@@ -38,4 +38,5 @@ Content-Type: application/json
     "author": "1",
     "location": ""
 }
-
+###
+GET http://localhost:8000/posts/6489a538a27b11db1cb1d59f
