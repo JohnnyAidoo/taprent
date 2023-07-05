@@ -22,7 +22,7 @@ app.use('/posts', posts_routes);
 app.use('/saved',saved_posts_routes);
 
 app.get('/', (req, res) =>{
-    res.send(200);
+    res.sendStatus(200);
 })
 
 

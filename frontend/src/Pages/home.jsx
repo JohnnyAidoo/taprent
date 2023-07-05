@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import CardTemp from "../component/cardTemp";
 import axios from 'axios'
 import Sidebar from "../component/sidebar";
+import Url from "../component/url";
 
 function Home() {
 
     const [posts , setposts] = useState([]);
 
     useEffect( ()=>{
-        axios.get('http://localhost:8000/posts').then((res) =>{
+        axios.get(`${Url}posts`).then((res) =>{
             setposts(res.data);
         })
 
