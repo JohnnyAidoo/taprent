@@ -4,6 +4,7 @@ import Url from "./url";
 import axios from "axios"
 import { redirect } from "react-router-dom";
 import logo from '../images/logo.png';
+import { keyframes } from "@emotion/react";
 
 
 function Header() {
@@ -16,7 +17,11 @@ function Header() {
     const [imageUrls, setimageUrls] = useState([]);
     const [features, setFeatures] = useState([]);
     const [author, setauthor] = useState();
+    
 
+    
+    const [display_upload_btn, setdisplay_upload_btn] = useState();
+    
     const primary = '#FBF5F3'
     const secondary = '#FBF5F3'
     const ctr = '#FD5200'
@@ -27,8 +32,9 @@ function Header() {
 ////////////////////////////////////////////////////////////////
 
     useEffect(() =>{
-        let userid = localStorage.getItem('userid')
+        const userid = localStorage.getItem('userid')
         userid ? setauthor(userid) : setauthor('')
+        userid ? setdisplay_upload_btn('block') : setdisplay_upload_btn('none')
     })
 
     const addToList = (e) =>{
@@ -122,15 +128,17 @@ const handleUpload = async (event) => {
                             <Form.Select >
                                 <option>Number of Bed rooms</option>
                                 {list.map((numberOfRoom) =>(
-                                    <option>
+                                    
+                                    <option key={numberOfRoom}>
+                                        
                                         {numberOfRoom}
                                     </option>
                                 ))}
                             </Form.Select>
                             <Form.Select >
-                                <option>Number of Bath rooms</option>
+                                <option >Number of Bath rooms</option>
                                 {list.map((numberOfRoom) =>(
-                                    <option>{numberOfRoom}</option>
+                                    <option key={numberOfRoom}>{numberOfRoom}</option>
                                 ))}
                             </Form.Select>
                         </div>
@@ -157,7 +165,7 @@ const handleUpload = async (event) => {
                 <input placeholder="search" type="text"/><button className="btn"><i className="fa fa-search" aria-hidden="true"></i></button>
                 </div>
                 <div className="d-flex">
-                    <Button onClick={() => {setpopup(true)}} style={{height :'100%'}} variant="ouline"><i className="fa fa-upload"></i></Button>
+                    <Button onClick={() => {setpopup(true)}} style={{height :'100%', display:display_upload_btn}} variant="ouline"><i className="fa fa-upload"></i></Button>
                     <Button id='profilebtn' style={{height :'100%'}} variant='outline' href='/profile' ><i className="fa fa-user"></i></Button>
                 </div>
             </header>

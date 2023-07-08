@@ -3,20 +3,27 @@ import CardTemp from "../component/cardTemp";
 import axios from 'axios'
 import Sidebar from "../component/sidebar";
 import Url from "../component/url";
+import Loading from "../component/loading";
 
 function Home() {
 
     const [posts , setposts] = useState([]);
-
+    const [load , setload] = useState();
+    
     useEffect( ()=>{
+    
         axios.get(`${Url}posts`).then((res) =>{
             setposts(res.data);
         })
 
+        document.readyState !== 'complete' ? setload(<Loading />) : setload('');
     })
+
+
 
     return (
         <>
+       
        <Sidebar home={true}/>
         <div id="home" style={{position:'absolute', right:0,paddingRight:'2%',paddingLeft:'4%'}}>
 
@@ -33,6 +40,7 @@ function Home() {
                 ))}
             </div>
         </div>
+        {load}
         </>
     );
 }
