@@ -1,8 +1,8 @@
-import { useState } from 'react'
-import img1 from '../images/1.jpg'
-import img2 from '../images/2.jpg'
+
 import {Carousel, ButtonGroup, Card, Button} from 'react-bootstrap'
-import MoreDetail from '../Pages/moreDetail'
+import axios from 'axios'
+import Url from './url'
+import { useEffect, useState } from 'react'
 
 function CardTemp(props) {
     const primary = '#FBF5F3'
@@ -11,43 +11,53 @@ function CardTemp(props) {
     const ctr2 = '#AF3800'
     let photoarray = props.photos
 
+    const [userid, setUserId] = useState('')
+
+    useEffect(()=>{
+        setUserId(localStorage.getItem('userid'))
+    })
+    
+
+    const handleSaveItem = (e) =>{
+        axios.post(`${Url}saved`,{
+            uid: userid,
+            itemId: props.id
+        }).then((res) => {
+            console.log(res)
+        })
+    }
+
     
     return (
         <>
-                <a href={`details/${props.id}`}>
+        
             <Card style={{width:'100%' ,borderRadius: '5%'}}>
+            <a href={`details/${props.id}`}>
                 <Carousel interval={null}>
-                    {/* <Carousel.Item>
-                        <Card.Img variant='top' src={img1}  style={{borderRadius: '5%'}}/>
-                    </Carousel.Item> 
-                    <Carousel.Item>
-                        <Card.Img variant='top' src={img2}  style={{borderRadius: '5%'}}/>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <Card.Img variant='top' src={img2}  style={{borderRadius: '5%'}} />
-                    </Carousel.Item> */}
                     {photoarray.map((photo) =>(
                         <Carousel.Item key={photo}>
                             <Card.Img variant='top' src={photo} 
                             key={photo} style={{borderRadius: '5%', aspectRatio:16/10, }}/>
                         </Carousel.Item>
-                    ))}
-                    
+                    ))}    
                 </Carousel>
+            </a>
                 <Card.Body>
+                <a href={`details/${props.id}`}>
                     <Card.Title>{props.title}</Card.Title>
                     <Card.Text><i className='fa fa-location' 
-                    style={{padding:'2%',color:ctr, fontSize:15}}></i>{props.location}</Card.Text>
+                        style={{padding:'2%',color:ctr, fontSize:15}}></i>{props.location}</Card.Text>
+                </a>
                     <div style={{ position:'relative',width:'100%',display:'flex', justifyContent:'center'}}>
-                    <ButtonGroup style={{ width:'80%', backgroundColor:ctr}} arial-label='call to action' size='sm'>
-                        <Button href={`tel:${props.tel}`} style={{backgroundColor:ctr, color:'white'}}  variant='primary'><i className='fa fa-phone'></i> Call</Button>
-                        <Button href='' style={{backgroundColor:ctr, color:'white'}}  variant='primary'><i className='fa fa-heart'></i> Save</Button>
-                        <Button href={`details/${props.id}`}  style={{backgroundColor:ctr, color:'white'}}  variant='primary'><i className='fa fa-share'></i> Share</Button>
-                    </ButtonGroup>
+                        <ButtonGroup style={{ width:'90%', backgroundColor:ctr}} arial-label='call to action' size='sm'>
+                            <Button href={`tel:${props.tel}`} style={{backgroundColor:ctr, color:'white', width:'100%'}}  variant='primary'><i className='fa fa-phone'></i> Call</Button>
+                            <Button onClick={handleSaveItem} style={{backgroundColor:ctr, color:'white', width:'100%'}}  variant='primary'><i className='fa fa-heart'></i> Save</Button>
+                            <Button href={`details/${props.id}`}  style={{backgroundColor:ctr, color:'white', width:'100%'}}  variant='primary'><i className='fa fa-share'></i> Share</Button>
+                        </ButtonGroup>
                     </div>
                 </Card.Body>
             </Card>
-            </a>
+        
         </>
     );
 }

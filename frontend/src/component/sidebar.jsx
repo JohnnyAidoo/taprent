@@ -6,12 +6,16 @@ import logo from '../images/logo.png';
 
 const Sidebar = (props) => {
 
+    const [uid, setuid] =useState()
 
     const primary = '#FBF5F3'
     const secondary = '#D3D4D9'
     const ctr = '#FD5200'
     const ctr2 = '#AF3800'
 
+    useEffect(() =>{
+        setuid(localStorage.getItem('userid'))
+    })
      
 
     return (
@@ -31,7 +35,7 @@ const Sidebar = (props) => {
                 <Nav.Link  className="text-dark" active={props.explore} href="/explore" style={{padding:'12%'}}> <i className="fa fa-compass"></i> Explore</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                <Nav.Link className="text-dark" active={props.saved} href="/mysaved" style={{padding:'12%'}}> <i className="fa fa-heart"></i> Saved</Nav.Link>
+                <Nav.Link className="text-dark" active={props.saved} href={`mysaved`} style={{padding:'12%'}}> <i className="fa fa-heart"></i> Saved</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                 <Nav.Link className="text-dark" active={props.profile} href="/profile" style={{padding:'12%'}}> <i className="fa fa-user"></i> Profile</Nav.Link>

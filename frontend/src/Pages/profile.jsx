@@ -4,12 +4,13 @@ import axios from 'axios';
 import Url from '../component/url';
 import Sidebar from '../component/sidebar';
 import Home from './home';
-import {Card, Avatar, CardContent, CardMedia, Typography, Box} from '@mui/material'
+import {Card, Avatar, CardContent, CardMedia, Typography, Box, CardHeader, Button, Modal, filledInputClasses, TextField} from '@mui/material'
 
 
 function Profile() {
 
  
+    const [open, setopen] = useState(false)
     const [name, setname] = useState('')
     const [number, setnumber] = useState('')
 
@@ -32,43 +33,72 @@ function Profile() {
         localStorage.removeItem('tel')
         window.location.pathname = '/auth'
     }
+     
+    const handleopen = (event) => {
+        open == true ? setopen(false) : setopen(true)
+    }
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        height: 'fit-content',
+        minWidth: '80%',
+        transform: 'translate(-50%, -50%)',
+        border: '.5px solid grey',
+        boxShadow: 24,
+        p: 4,
+      };
+
 
     return (
         <>
+
+            {/* modal */}
+            <Modal 
+            open={open}
+            onClose={handleopen}
+            >
+                <Box sx={style} component='form'>
+                <Card sx={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', padding:'5%'}} >
+                <Box sx={{width:'50%',display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+                    <Avatar  alt={name} src={''} sx={{width:150, height:150}} />
+                    <input type="file" name="image" itemType='jpg' id="" />
+                </Box>
+                <CardContent sx={{width:'70%'}} >
+                    <h4 style={{fontSize:30, fontWeight:'bold'}}>
+                        <TextField sx={{width:'80%'}}
+                        variant='standard'
+                        label="Name"
+                        defaultValue={name}
+                        ></TextField>
+                    </h4>
+                    <TextField sx={{width:'80%'}}
+                    variant='standard'
+                    label= ' Description '
+                    defaultValue=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis enim veritatis quis iusto sed officiis, rem dolores libero eveniet omnis sunt cupiditate explicabo
+                    neque voluptas reprehenderit blanditiis quisquam. Dolores, blanditiis?"
+                    multiline
+                    rows={5}
+                    maxRows={8}
+                    ></TextField>
+                </CardContent>
+            </Card>
+                </Box>
+            </Modal>
+
+
         <Sidebar profile={true} />
         <div id='home' style={{position:'absolute', right:0,paddingRight:'2%',paddingLeft:'4%'}}>
-            {/* <Card>
-                <div className='d-flex px-5 justify-content-center align-items-center'>
-                <Card.Img style={{width: '15vw'}} src={noImg} alt={noImg} />
-                <div className='px-5'>
-                    <h4> <b> Agent </b></h4>
-                    <b>Name:</b><span><p>{name}</p></span>
-                    <b>Joined in:</b><span><p>48 November 2025</p></span>
-                    <p>{number}</p>
-                </div>
-                </div>
-                <Card.Body>
-                    <ListGroup>
-                        <ListGroup.Item className='p-4 d-flex align-items-center'>
-                            <i className='fa fa-pen h-100 p-2'></i>
-                            <h3>Edit Profile</h3>
-                        </ListGroup.Item>
-                        <ListGroup.Item className='p-4 d-flex align-items-center'>
-                            <i className='fa fa-gear h-100 p-2'></i>
-                            <h3>Settings</h3>
-                        </ListGroup.Item>
-                        <ListGroup.Item onClick={logout} className='p-4 d-flex align-items-center'>
-                            <i className='fa fa-gear h-100 p-2'></i>
-                            <h3>Logout</h3>
-                        </ListGroup.Item>
-                    </ListGroup>
-                </Card.Body>
-            </Card> */}
+            
             <Card sx={{display:'flex'}} >
                 <Box sx={{width:'40%',display:'flex', justifyContent:'center', alignItems:'center'}}>
                     <Avatar  alt={name} src={''} sx={{width:150, height:150}} />
                 </Box>
                 <CardContent sx={{width:'70%'}} >
+                    <CardHeader action={<Button onClick={handleopen} variant='text' sx={{color:'black'}} ><i className='fa fa-pen'></i></Button>} >
+
+                    </CardHeader>
                     <h4 style={{fontSize:30, fontWeight:'bold'}}>
                         {name}
                     </h4>

@@ -8,9 +8,9 @@ import Profile from './Pages/profile';
 import MobileNav from './component/mobileNav';
 import AuthPage from './Pages/authPage';
 import MoreDetail from './Pages/moreDetail';
+import { useEffect } from 'react';
 
 function App() {
-
 
 
   return (

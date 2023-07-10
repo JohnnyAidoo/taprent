@@ -5,10 +5,11 @@ const saved_post_model = require('../models/savedPost')
 
 //get saved post
 router.get('/', (req, res) => {
-    const uid = req.params.uid;
+    const uid = req.query
 
-    saved_post_model.find({uid: uid}).then((response)=> {
-        res.json(response)
+    saved_post_model.find({uid: uid})
+        .then((response)=> {
+            res.json(response)
     })
 
 })
@@ -16,13 +17,15 @@ router.get('/', (req, res) => {
 //add saved post
 
 router.post('/' ,async (req, res)=>{
-    const save = new saved_post_model({
-        uid: req.params.uid,
-        itemId: req.params.itemId
+
+    
+    const saveOne = new saved_post_model({
+        uid: req.body.uid,
+        itemId: req.body.itemId
     })
 
     try{
-        const newsaved = await save.save()
+        const newsaved = await saveOne.save()
         res.status(201).json(newsaved)
     }catch(err){
         res.status(400).json({message:err.message})
