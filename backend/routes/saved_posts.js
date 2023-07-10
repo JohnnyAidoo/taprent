@@ -4,8 +4,8 @@ const saved_post_model = require('../models/savedPost')
 
 
 //get saved post
-router.get('/', (req, res) => {
-    const uid = req.query
+router.get('/:uid', (req, res) => {
+    const uid = req.params.uid
 
     saved_post_model.find({uid: uid})
         .then((response)=> {
