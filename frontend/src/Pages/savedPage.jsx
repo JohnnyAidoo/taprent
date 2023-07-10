@@ -2,15 +2,14 @@ import { useEffect, useState } from "react";
 import Sidebar from "../component/sidebar";
 import axios from "axios";
 import Url from "../component/url";
-import { useParams } from "react-router-dom";
 import CardTemp from "../component/cardTemp";
-import { ListItemIcon } from "@mui/material";
+
 
 function SavePage() {
 
     const [saveds, Setsaveds] = useState([])
     const [posts, Setposts] = useState([])
-    let array = [];
+    
     
 
 
@@ -22,19 +21,23 @@ function SavePage() {
             Setsaveds(res.data)
         })
 
-        const getItmes = async () =>{
-            //console.log(saveds)
-            for (let items = 0; items < saveds.length; items++) {
-                axios.get(`${Url}posts/${saveds[items].itemId}`).then((res) =>{
-                    array.push(res.data)
-                })
-            }
-            Setposts(array)
-        }
+       
 
         getreq()
+    },[])
+
+    useEffect(() =>{
+        const getItmes = async () =>{
+            for (let items = 0; items < saveds.length; items++) {
+                axios.get(`${Url}posts/${saveds[items].itemId}`).then((res) =>{
+                    Setposts([res.data])
+                })
+            }
+            
+        }
+
         getItmes()
-    })
+    },[])
 
     return (
         <>
