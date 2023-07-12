@@ -22,15 +22,22 @@ function CardTemp(props) {
     
 
     const handleSaveItem = (e) =>{
-        axios.post(`${Url}saved`,{
-            uid: userid,
-            itemId: props.id
-        }).then((res) => {
-            console.log(res.status)
-            res.status === 201 ? setopen({open:true, message:'Item Saved Sucessfully'}) : setopen({open:true, message:'Item Already Saved'})
-        }).catch((err) => {
-            setopen({open:true, message:err})
-        })
+
+        if (e.target.id == 'un'){
+            console.log('saved')
+        }else{
+            axios.post(`${Url}saved`,{
+                uid: userid,
+                itemId: props.id
+            }).then((res) => {
+                console.log(res.status)
+                res.status === 201 ? setopen({open:true, message:'Item Saved Sucessfully'}) : setopen({open:true, message:'Item Already Saved'})
+            }).catch((err) => {
+                setopen({open:true, message:err})
+            })
+        }
+
+       
     }
 
     
@@ -72,7 +79,7 @@ function CardTemp(props) {
                 <CardActionArea sx={{width:'100%', display:'flex', justifyContent:'center',borderColor:'grey', borderWidth:1}}>
                     <ButtonGroup color='warning' variant='contained' sx={{width:'80%'}}>
                         <Button  href={`tel:${props.tel}`} ><i className='fa fa-phone'></i> Call</Button>
-                        <Button onClick={handleSaveItem} style={{width:'100%'}}><i className='fa fa-heart'></i> Save</Button>
+                        <Button onClick={handleSaveItem} style={{width:'100%'}} id={props.remove} ><i className='fa fa-heart'></i> {props.remove}Save</Button>
                         <Button href={`details/${props.id}`} ><i className='fa fa-share'></i> Share</Button>
                     </ButtonGroup>
                 </CardActionArea>

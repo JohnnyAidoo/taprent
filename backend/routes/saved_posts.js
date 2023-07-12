@@ -42,4 +42,8 @@ router.post('/' ,async (req, res)=>{
     }
 })
 
+router.delete('/delete/:id', async (req, res) =>{
+    
+})
+
 module.exports = router

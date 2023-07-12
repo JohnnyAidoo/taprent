@@ -49,6 +49,7 @@ function SavePage() {
                     title={post.title}
                     location={post.location}
                     tel ={post.telephone}
+                    remove = {'un'}
                     />
                 ))}
             </div>

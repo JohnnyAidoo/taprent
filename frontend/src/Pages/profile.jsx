@@ -96,7 +96,12 @@ function Profile() {
                     <Avatar  alt={name} src={''} sx={{width:150, height:150}} />
                 </Box>
                 <CardContent sx={{width:'70%'}} >
-                    <CardHeader action={<Button onClick={handleopen} variant='text' sx={{color:'black'}} ><i className='fa fa-pen'></i></Button>} >
+                    <CardHeader action={
+                        <div>
+                            <Button onClick={handleopen} variant='text' sx={{color:'black', fontSize:20}} ><i className='fa fa-pen'></i></Button>
+                            <Button onClick={logout} variant='text' sx={{color:'red', fontSize:20}} ><i className='fa fa-sign-out'></i></Button>
+                        </div>
+                    }>
 
                     </CardHeader>
                     <h4 style={{fontSize:30, fontWeight:'bold'}}>
@@ -111,7 +116,7 @@ function Profile() {
             <br />
             <br />
             <br />
-            <h1>post</h1>
+            <h1>Your Posts</h1>
             <Home />
         </div>
         
