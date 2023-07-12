@@ -3,6 +3,8 @@ import Sidebar from "../component/sidebar";
 import axios from "axios";
 import Url from "../component/url";
 import CardTemp from "../component/cardTemp";
+import ex from "../component/get_saved";
+
 
 
 function SavePage() {
@@ -10,51 +12,52 @@ function SavePage() {
     const [saveds, Setsaveds] = useState([])
     const [posts, Setposts] = useState([])
     
+
+
+    useEffect(() =>{
+
+        const uid = localStorage.getItem('userid');
+
+        const fetchSaved = async () =>{
+                try{
+                const response = await axios.get(`${Url}saved/${uid}`)
+                const data = (response.data)
     
-
-
-
-    useEffect(() =>{
-        let uid = localStorage.getItem('userid')
-
-        const getreq = async () => await axios.get(`${Url}saved/${uid}`).then((res) =>{
-            Setsaveds(res.data)
-        })
-
-       
-
-        getreq()
-    },[])
-
-    useEffect(() =>{
-        const getItmes = async () =>{
-            for (let items = 0; items < saveds.length; items++) {
-                axios.get(`${Url}posts/${saveds[items].itemId}`).then((res) =>{
-                    Setposts([res.data])
-                })
+                const fullPosts = await Promise.all(
+                    data.map(async (item) => {
+                        const postResponse = await axios.get(`${Url}posts/${item.itemId}`)
+                        return postResponse.data
+                    })
+                );
+    
+                Setposts(fullPosts)
+                console.log(fullPosts)
+            } catch (error){
+                console.error('Error fetching posts:' , error)
             }
-            
-        }
+            }
 
-        getItmes()
-    },[])
+        fetchSaved()
+    })
 
     return (
         <>
         <Sidebar saved={true} />
         <div id="home" style={{position:'absolute', right:0,paddingRight:'2%',paddingLeft:'4%'}}>
-            {posts.map((post) =>(
-                <CardTemp
-                key={post._id}
-                id={post._id}
-                photos={post.photos} 
-                title={post.title}
-                location={post.location}
-                tel ={post.telephone}
-                />
-            ))}
+            
+            <div id='grid'>
+                {posts.map((post) =>(
+                    <CardTemp
+                    key={post._id}
+                    id={post._id}
+                    photos={post.photos} 
+                    title={post.title}
+                    location={post.location}
+                    tel ={post.telephone}
+                    />
+                ))}
+            </div>
 
-            <h1>Coming Soon</h1>
         </div>
         </>
     );

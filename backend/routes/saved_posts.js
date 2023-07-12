@@ -1,16 +1,26 @@
 const express = require('express');
 const router = express.Router();
 const saved_post_model = require('../models/savedPost')
-
+const axios = require('axios'); 
+const Url = require('./Url');
 
 //get saved post
 router.get('/:uid', (req, res) => {
     const uid = req.params.uid
 
-    saved_post_model.find({uid: uid})
-        .then((response)=> {
-            res.json(response)
-    })
+    const search_for_saved = () =>{
+
+
+        saved_post_model.find({uid: uid})
+            .then((response)=> {
+                res.send(response);
+        })
+
+    }
+
+    search_for_saved()
+    
+    
 
 })
 

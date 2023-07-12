@@ -7,7 +7,8 @@ const saved_post_schema = new mongoose.Schema({
     },
     itemId:{
         type: String,
-        required:true
+        required:true,
+        unique:true
     },
     date_saved:{
         type: Date,
