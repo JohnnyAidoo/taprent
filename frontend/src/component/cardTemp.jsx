@@ -1,5 +1,6 @@
 
-import {Carousel, ButtonGroup, Card, Button} from 'react-bootstrap'
+import {Card , Button, CardContent, Typography, CardActionArea, ButtonGroup, CardMedia} from '@mui/material'
+import {Carousel} from 'react-bootstrap'
 import axios from 'axios'
 import Url from './url'
 import { useEffect, useState } from 'react'
@@ -30,33 +31,35 @@ function CardTemp(props) {
     
     return (
         <>
-        
-            <Card style={{width:'100%' ,borderRadius: '5%'}}>
-            <a href={`details/${props.id}`}>
+            <Card sx={{bgcolor:primary,width:'100%',aspectRatio:3/4}} elevation={0}>
+                <CardContent>
+                    <a href={`details/${props.id}`}>
                 <Carousel interval={null}>
                     {photoarray.map((photo) =>(
                         <Carousel.Item key={photo}>
-                            <Card.Img variant='top' src={photo} 
+                            <CardMedia image={photo} 
                             key={photo} style={{borderRadius: '5%', aspectRatio:16/10, }}/>
                         </Carousel.Item>
                     ))}    
                 </Carousel>
-            </a>
-                <Card.Body>
+                     </a>
+
                 <a href={`details/${props.id}`}>
-                    <Card.Title>{props.title}</Card.Title>
-                    <Card.Text><i className='fa fa-location' 
-                        style={{padding:'2%',color:ctr, fontSize:15}}></i>{props.location}</Card.Text>
+                    <h5>{props.title}</h5>
+                    <Typography><i className='fa fa-location' 
+                        style={{padding:'2%',color:ctr, fontSize:15}}></i>{props.location}</Typography>
                 </a>
-                    <div style={{ position:'relative',width:'100%',display:'flex', justifyContent:'center'}}>
-                        <ButtonGroup style={{ width:'90%', backgroundColor:ctr}} arial-label='call to action' size='sm'>
-                            <Button href={`tel:${props.tel}`} style={{backgroundColor:ctr, color:'white', width:'100%'}}  variant='primary'><i className='fa fa-phone'></i> Call</Button>
-                            <Button onClick={handleSaveItem} style={{backgroundColor:ctr, color:'white', width:'100%'}}  variant='primary'><i className='fa fa-heart'></i> Save</Button>
-                            <Button href={`details/${props.id}`}  style={{backgroundColor:ctr, color:'white', width:'100%'}}  variant='primary'><i className='fa fa-share'></i> Share</Button>
-                        </ButtonGroup>
-                    </div>
-                </Card.Body>
+                </CardContent>
+                <br />
+                <CardActionArea sx={{width:'100%', display:'flex', justifyContent:'center',borderColor:'grey', borderWidth:1}}>
+                    <ButtonGroup color='warning' variant='contained' sx={{width:'80%'}}>
+                        <Button  href={`tel:${props.tel}`} ><i className='fa fa-phone'></i> Call</Button>
+                        <Button onClick={handleSaveItem} style={{width:'100%'}}><i className='fa fa-heart'></i> Save</Button>
+                        <Button href={`details/${props.id}`} ><i className='fa fa-share'></i> Share</Button>
+                    </ButtonGroup>
+                </CardActionArea>
             </Card>
+
         
         </>
     );

@@ -3,16 +3,12 @@ import Sidebar from "../component/sidebar";
 import axios from "axios";
 import Url from "../component/url";
 import CardTemp from "../component/cardTemp";
-import ex from "../component/get_saved";
 
 
 
 function SavePage() {
-
-    const [saveds, Setsaveds] = useState([])
     const [posts, Setposts] = useState([])
     
-
 
     useEffect(() =>{
 
