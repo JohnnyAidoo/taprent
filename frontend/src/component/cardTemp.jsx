@@ -1,5 +1,5 @@
 
-import {Card , Button, CardContent, Typography, CardActionArea, ButtonGroup, CardMedia} from '@mui/material'
+import {Card , Button, CardContent, Typography, CardActionArea, ButtonGroup, CardMedia, Modal, Paper} from '@mui/material'
 import {Carousel} from 'react-bootstrap'
 import axios from 'axios'
 import Url from './url'
@@ -13,6 +13,8 @@ function CardTemp(props) {
     let photoarray = props.photos
 
     const [userid, setUserId] = useState('')
+    const [popup, setPopup] = useState()
+    const [open, setopen] = useState({open : false , message: ''})
 
     useEffect(()=>{
         setUserId(localStorage.getItem('userid'))
@@ -24,13 +26,29 @@ function CardTemp(props) {
             uid: userid,
             itemId: props.id
         }).then((res) => {
-            console.log(res)
+            console.log(res.status)
+            res.status === 201 ? setopen({open:true, message:'Item Saved Sucessfully'}) : setopen({open:true, message:'Item Already Saved'})
+        }).catch((err) => {
+            setopen({open:true, message:err})
         })
     }
 
     
     return (
         <>
+        {popup}
+        <Modal 
+        sx={{width:'100%', height:'100%', display:'flex',justifyContent:'center', alignItems:'center',bgcolor:'transparent'}} 
+        open={open.open}
+        onClose={() =>{setopen(false)}}
+        >
+            <Paper sx={{padding:2}} >
+                <Typography variant='h5' color='green'> <i className='fa fa-check'></i> Item Saved Successfully</Typography>
+            </Paper>
+        </Modal>
+
+
+
             <Card sx={{bgcolor:primary,width:'100%',aspectRatio:3/4}} elevation={0}>
                 <CardContent>
                     <a href={`details/${props.id}`}>

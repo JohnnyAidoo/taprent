@@ -27,7 +27,6 @@ function SavePage() {
                 );
     
                 Setposts(fullPosts)
-                console.log(fullPosts)
             } catch (error){
                 console.error('Error fetching posts:' , error)
             }
