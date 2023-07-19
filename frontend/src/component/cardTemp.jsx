@@ -12,7 +12,9 @@ function CardTemp(props) {
     const secondary = '#D3D4D9'
     const ctr = '#FD5200'
     const ctr2 = '#AF3800'
+    const message = 'Check Out This House Available For Rent At OneRent '
     let photoarray = props.photos
+
 
     const [userid, setUserId] = useState('')
     const [current_loc, setcurrent_loc] = useState('')
@@ -63,27 +65,29 @@ function CardTemp(props) {
             <Paper sx={{padding:2}} >
                 <Grid container spacing={3}>
                     <Grid item>
-                        <FacebookShareButton url={`${current_loc}details/${props.id}`}>
+                        <FacebookShareButton url={`${current_loc}details/${props.id}`}
+                        quote={message}
+                        >
                             <FacebookIcon size={40} round={true} />
                         </FacebookShareButton>
                     </Grid>
                     <Grid item>
-                        <TwitterShareButton url={`${current_loc}details/${props.id}`}>
+                        <TwitterShareButton url={`${current_loc}details/${props.id}`} title={message}>
                             <TwitterIcon size={40} round={true} />
                         </TwitterShareButton>
                     </Grid>
                     <Grid item>
-                        <WhatsappShareButton url={`${current_loc}details/${props.id}`}>
+                        <WhatsappShareButton url={`${current_loc}details/${props.id}`} title={message}>
                             <WhatsappIcon size={40} round={true} />
                         </WhatsappShareButton>
                     </Grid>
                     <Grid item>
-                        <EmailShareButton url={`${current_loc}details/${props.id}`}>
+                        <EmailShareButton url={`${current_loc}details/${props.id}`} body={message}>
                             <EmailIcon size={40} round={true} />
                         </EmailShareButton>
                     </Grid>
                     <Grid item>
-                        <TelegramShareButton url={`${current_loc}details/${props.id}`}>
+                        <TelegramShareButton url={`${current_loc}details/${props.id}`} title={message} >
                             <TelegramIcon size={40} round={true}  />
                         </TelegramShareButton>
                     </Grid>
