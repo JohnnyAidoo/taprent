@@ -5,6 +5,7 @@ import Url from '../component/url';
 import Sidebar from '../component/sidebar';
 import Home from './home';
 import {Card, Avatar, CardContent, CardMedia, Typography, Box, CardHeader, Button, Modal, filledInputClasses, TextField} from '@mui/material'
+import MobileNav from '../component/mobileNav';
 
 
 function Profile() {
@@ -119,7 +120,7 @@ function Profile() {
             <h1>Your Posts</h1>
             <Home />
         </div>
-        
+        <MobileNav value={2} />
         </>
     );
 }

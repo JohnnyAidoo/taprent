@@ -3,6 +3,7 @@ import Sidebar from "../component/sidebar";
 import axios from "axios";
 import Url from "../component/url";
 import CardTemp from "../component/cardTemp";
+import MobileNav from "../component/mobileNav";
 
 
 
@@ -38,6 +39,7 @@ function SavePage() {
     return (
         <>
         <Sidebar saved={true} />
+        
         <div id="home" style={{position:'absolute', right:0,paddingRight:'2%',paddingLeft:'4%'}}>
             
             <div id='grid'>
@@ -55,6 +57,7 @@ function SavePage() {
             </div>
                 End Of Result
         </div>
+        <MobileNav value={1} />
         </>
     );
 }

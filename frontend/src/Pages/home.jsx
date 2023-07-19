@@ -4,6 +4,7 @@ import axios from 'axios'
 import Sidebar from "../component/sidebar";
 import Url from "../component/url";
 import Loading from "../component/loading";
+import MobileNav from "../component/mobileNav";
 
 function Home() {
 
@@ -37,9 +38,11 @@ function Home() {
                     location={post.location}
                     tel ={post.telephone}
                     />
-                ))}
+                    ))}
             </div>
         </div>
+        
+        <MobileNav value={0} />
         {load}
         </>
     );

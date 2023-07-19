@@ -26,7 +26,6 @@ function App() {
         <Route path='details/:postid' element={<MoreDetail/>} />
       </Routes>
     </Router>
-<MobileNav />
     </>
   );
 }
