@@ -112,7 +112,7 @@ function CardTemp(props) {
             <Card sx={{bgcolor:primary,width:'100%',aspectRatio:3/4}} elevation={0}>
                 <CardContent>
                     <a href={`details/${props.id}`}>
-                <Carousel interval={null}>
+                <Carousel interval={null} >
                     {photoarray.map((photo) =>(
                         <Carousel.Item key={photo}>
                             <CardMedia image={photo} 

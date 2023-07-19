@@ -26,6 +26,7 @@ function MoreDetail() {
         location : '',
         photos : [],
         features : [],
+        author:''
     }) 
 
     const params = useParams()
@@ -46,10 +47,14 @@ function MoreDetail() {
                 price : res.data.price,
                 location : res.data.location,
                 photos : res.data.photos,
-                features : res.data.features
+                features : res.data.features,
+                author : res.data.author
             })
             
+        }).then(() =>{
+            axios.get(`${Url}`)
         })
+
     },[])
 
 

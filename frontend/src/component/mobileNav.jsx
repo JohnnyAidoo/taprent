@@ -30,7 +30,7 @@ function MobileNav(props) {
             })}
             >
             <Paper id='mobileNav'
-            sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}
+            sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 , width:'100%'}} elevation={3}
             >
             <BottomNavigation
             showLabels
