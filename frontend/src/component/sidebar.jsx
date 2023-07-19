@@ -31,9 +31,9 @@ const Sidebar = (props) => {
                 <Nav.Item >
                 <Nav.Link className="text-dark" active={props.home} href="/"  style={{padding:'12%'}}><i className="fa fa-home"></i> Home </Nav.Link>
                 </Nav.Item>
-                <Nav.Item>
+                {/* <Nav.Item>
                 <Nav.Link  className="text-dark" active={props.explore} href="/explore" style={{padding:'12%'}}> <i className="fa fa-compass"></i> Explore</Nav.Link>
-                </Nav.Item>
+                </Nav.Item> */}
                 <Nav.Item>
                 <Nav.Link className="text-dark" active={props.saved} href={`mysaved`} style={{padding:'12%'}}> <i className="fa fa-heart"></i> Saved</Nav.Link>
                 </Nav.Item>
