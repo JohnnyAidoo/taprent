@@ -45,7 +45,7 @@ router.post('/' ,async (req, res)=>{
 router.delete('/delete/:id', async (req, res) =>{
     const itemid = req.params.id
     saved_post_model.findOneAndDelete({itemId : itemid}).then((result) =>{
-        res.json('deleted')
+        res.json('item unsaved')
     }).catch((err) =>{
         res.json(err)
     })
