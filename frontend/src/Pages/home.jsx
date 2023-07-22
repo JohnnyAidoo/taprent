@@ -14,10 +14,10 @@ function Home() {
     axios.get(`${Url}posts`).then((res) => {
       setposts(res.data);
     });
-
-    document.readyState !== "complete" ? setload(<Loading />) : setload("");
   }, []);
-
+  useEffect(() => {
+    document.readyState !== "complete" ? setload(<Loading />) : setload("");
+  });
   return (
     <>
       <Sidebar home={true} />
