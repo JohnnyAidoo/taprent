@@ -132,6 +132,7 @@ function Header() {
 
             <Form.Control
               placeholder="Title"
+              maxLength={40}
               style={{ marginBottom: "2%" }}
               onChange={(e) => {
                 settitle(e.target.value);
