@@ -1,8 +1,11 @@
 import { Tabs, Tab } from "react-bootstrap";
 import LoginElement from "../component/loginElement";
 import RegisterElement from "../component/registerElement";
+import { useMediaQuery } from "@mui/material";
 
 function AuthPage() {
+  const mobileScreen = useMediaQuery("(max-width : 500px)");
+
   return (
     <>
       <div
@@ -19,7 +22,11 @@ function AuthPage() {
           flexDirection: "column",
         }}
       >
-        <Tabs defaultActiveKey={1} fill style={{ width: "50vw" }}>
+        <Tabs
+          defaultActiveKey={1}
+          fill
+          style={{ width: mobileScreen ? "90vw" : "50vw" }}
+        >
           <Tab eventKey={1} title="login">
             <LoginElement />
           </Tab>
