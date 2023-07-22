@@ -16,7 +16,7 @@ function Home() {
     });
 
     document.readyState !== "complete" ? setload(<Loading />) : setload("");
-  });
+  }, []);
 
   return (
     <>

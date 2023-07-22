@@ -138,6 +138,5 @@ li:hover {
 @media screen and (max-width: 500px) {
   #grid {
     grid-template-columns: repeat(1, 1fr);
-    row-gap: 10px;
   }
 }
