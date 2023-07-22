@@ -1,20 +1,20 @@
-:root{
-  --primary: #FBF5F3;
+:root {
+  --primary: #fbf5f3;
   --secondary: #ffffff;
-  --ctr:#FD5200;
-  --ctr2: #AF3800;
+  --ctr: #fd5200;
+  --ctr2: #af3800;
 }
 
-#searchBar{
-  padding: .1%;
+#searchBar {
+  padding: 0.1%;
   min-width: 30%;
   border-radius: 10px;
-  border:solid .2px #D3D4D9;
+  border: solid 0.2px #d3d4d9;
 }
-#searchBar:hover{
+#searchBar:hover {
   outline: solid 1px var(--ctr);
-  }
-#searchBar input{
+}
+#searchBar input {
   width: 85%;
   position: relative;
   border-radius: 20px 0 0px 20px;
@@ -25,123 +25,119 @@
   padding-left: 5%;
 }
 
-#searchBar button{
+#searchBar button {
   width: 15%;
   height: 100%;
   border: none;
   outline: none;
   background-color: transparent;
 }
-#home{
+#home {
   width: 80vw;
 }
-a{
+a {
   width: 100%;
   height: 100%;
   text-decoration: none;
   color: black;
 }
 
-#nav{
+#nav {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   height: 50%;
 }
-#mobileNav{
+#mobileNav {
   display: none;
 }
-.ul{
+.ul {
   margin-top: 5%;
   width: 100%;
   display: flex;
   flex-direction: column;
   height: fit-content;
   justify-content: space-around;
-
 }
-li:hover{
-  background-color: #D3D4D9;
+li:hover {
+  background-color: #d3d4d9;
 }
-.active{
+.active {
   font-weight: bold;
   font-size: larger;
 }
-#button:hover{
+#button:hover {
   background-color: var(--ctr2);
   color: grey;
 }
-#grid{
+#grid {
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1%;
 }
 
-.nav-item:hover{
+.nav-item:hover {
   background-color: whitesmoke;
 }
 .nav .nav-link.active {
   background-color: var(--secondary);
 }
 
-.btn-primary{
+.btn-primary {
   background-color: var(--ctr);
 }
-.btn-primary:hover{
+.btn-primary:hover {
   background-color: var(--ctr2);
 }
-.nav-link{
+.nav-link {
   color: var(--ctr2);
 }
-.card{
+.card {
   border-radius: 5%;
-  background-color: var(--primary); 
+  background-color: var(--primary);
 }
 
-.btn-group .btn-group-sm{
+.btn-group .btn-group-sm {
   background-color: transparent;
   border: none;
 }
-#col{
+#col {
   background-image: url(images/logo.png);
   background-repeat: no-repeat;
   background-size: cover;
 }
-#headimg{
+#headimg {
   display: none;
 }
 
-@media screen and (max-width:768px) {
-  #grid{
-    grid-template-columns: repeat(2,1fr);
+@media screen and (max-width: 768px) {
+  #grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-  #sidebar{
+  #sidebar {
     display: none;
   }
-  #headimg{
+  #headimg {
     display: block;
   }
-  #col{
+  #col {
     display: none;
   }
-  #home{
+  #home {
     width: 100vw;
   }
-  #mobileNav{
+  #mobileNav {
     background: var(--primary);
     display: block;
     width: 100%;
-    
   }
-  #profilebtn{
+  #profilebtn {
     display: none;
   }
- 
 }
-@media screen and (max-width:500px) {
-  #grid{
-    grid-template-columns: repeat(1,1fr);
+@media screen and (max-width: 500px) {
+  #grid {
+    grid-template-columns: repeat(1, 1fr);
+    row-gap: 10px;
   }
-
- 
 }

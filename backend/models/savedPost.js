@@ -1,21 +1,20 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const saved_post_schema = new mongoose.Schema({
-    uid:{
-        type: String,
-        required:true
-    },
-    itemId:{
-        type: String,
-        required:true,
-        unique:true
-    },
-    date_saved:{
-        type: Date,
-        required: true,
-        default: Date.now()
-    }
+  uid: {
+    type: String,
+    required: true,
+  },
+  itemId: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  date_saved: {
+    type: Date,
+    required: true,
+    default: Date.now(),
+  },
+});
 
-})
-
-module.exports = mongoose.model('Saved_post', saved_post_schema)
+module.exports = mongoose.model("Saved_post", saved_post_schema);

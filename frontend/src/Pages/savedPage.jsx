@@ -5,61 +5,64 @@ import Url from "../component/url";
 import CardTemp from "../component/cardTemp";
 import MobileNav from "../component/mobileNav";
 
-
-
 function SavePage() {
-    const [posts, Setposts] = useState([])
-    
+  const [posts, Setposts] = useState([]);
 
-    useEffect(() =>{
+  useEffect(() => {
+    const uid = localStorage.getItem("userid");
 
-        const uid = localStorage.getItem('userid');
+    const fetchSaved = async () => {
+      try {
+        const response = await axios.get(`${Url}saved/${uid}`);
+        const data = response.data;
 
-        const fetchSaved = async () =>{
-                try{
-                const response = await axios.get(`${Url}saved/${uid}`)
-                const data = (response.data)
-    
-                const fullPosts = await Promise.all(
-                    data.map(async (item) => {
-                        const postResponse = await axios.get(`${Url}posts/${item.itemId}`)
-                        return postResponse.data
-                    })
-                );
-    
-                Setposts(fullPosts)
-            } catch (error){
-                console.error('Error fetching posts:' , error)
-            }
-            }
+        const fullPosts = await Promise.all(
+          data.map(async (item) => {
+            const postResponse = await axios.get(`${Url}posts/${item.itemId}`);
+            return postResponse.data;
+          })
+        );
 
-        fetchSaved()
-    })
+        Setposts(fullPosts);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
 
-    return (
-        <>
-        <Sidebar saved={true} />
-        
-        <div id="home" style={{position:'absolute', right:0,paddingRight:'2%',paddingLeft:'4%'}}>
-            
-            <div id='grid'>
-                {posts.map((post) =>(
-                    <CardTemp
-                    key={post._id}
-                    id={post._id}
-                    photos={post.photos} 
-                    title={post.title}
-                    location={post.location}
-                    tel ={post.telephone}
-                    remove = {'un'}
-                    />
-                ))}
-            </div>
-                End Of Result
+    fetchSaved();
+  });
+
+  return (
+    <>
+      <Sidebar saved={true} />
+
+      <div
+        id="home"
+        style={{
+          position: "absolute",
+          right: 0,
+          paddingRight: "2%",
+          paddingLeft: "4%",
+        }}
+      >
+        <div id="grid">
+          {posts.map((post) => (
+            <CardTemp
+              key={post._id}
+              id={post._id}
+              photos={post.photos}
+              title={post.title}
+              location={post.location}
+              tel={post.telephone}
+              remove={"un"}
+            />
+          ))}
         </div>
-        <MobileNav value={1} />
-        </>
-    );
+        End Of Result
+      </div>
+      <MobileNav value={1} />
+    </>
+  );
 }
 
 export default SavePage;
