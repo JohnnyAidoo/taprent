@@ -247,7 +247,7 @@ function Profile() {
         <br />
         <br />
         <br />
-        <h1>Your Posts</h1>
+        {/* <h1>Your Posts</h1> */}
         <div
           id="home"
           style={{
