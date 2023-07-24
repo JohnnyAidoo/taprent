@@ -9,8 +9,17 @@ import MobileNav from "./component/mobileNav";
 import AuthPage from "./Pages/authPage";
 import MoreDetail from "./Pages/moreDetail";
 import { useEffect } from "react";
+import { analytics } from "./component/firebase";
+import ReactGA from "react-ga";
+import { getAnalytics, logEvent } from "firebase/analytics";
 
 function App() {
+  const TRACKINGID = "UA-233212579-1";
+  ReactGA.initialize(TRACKINGID);
+
+  const analytics = getAnalytics();
+  logEvent(analytics, "notification_received");
+
   return (
     <>
       <Header exact />

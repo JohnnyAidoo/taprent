@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import MobileNav from "../component/mobileNav";
 import CardTemp from "../component/cardTemp";
+import ReactGA from "react-ga";
 
 function Profile() {
   // varaibles
@@ -30,6 +31,11 @@ function Profile() {
   });
 
   //   use effects / funtions
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname);
+  }, []);
+
   useEffect(() => {
     let userid = localStorage.getItem("userid");
     const getUserData = async (uid) => {

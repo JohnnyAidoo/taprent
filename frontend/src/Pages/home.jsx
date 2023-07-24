@@ -5,10 +5,15 @@ import Sidebar from "../component/sidebar";
 import Url from "../component/url";
 import Loading from "../component/loading";
 import MobileNav from "../component/mobileNav";
+import ReactGA from "react-ga";
 
 function Home() {
   const [posts, setposts] = useState([]);
   const [load, setload] = useState();
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname);
+  }, []);
 
   useEffect(() => {
     axios.get(`${Url}posts`).then((res) => {

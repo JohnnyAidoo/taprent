@@ -30,11 +30,16 @@ import {
   TelegramShareButton,
   TelegramIcon,
 } from "react-share";
+import ReactGA from "react-ga";
 
 function MoreDetail() {
   const [current_loc, setcurrent_loc] = useState("");
   const [popupShare, setPopupShare] = useState(false);
   const [open, setopen] = useState({ open: false, message: "" });
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname);
+  }, []);
 
   const [post_item, setPost_item] = useState({
     title: "",

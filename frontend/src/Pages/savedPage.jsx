@@ -4,9 +4,14 @@ import axios from "axios";
 import Url from "../component/url";
 import CardTemp from "../component/cardTemp";
 import MobileNav from "../component/mobileNav";
+import ReactGA from "react-ga";
 
 function SavePage() {
   const [posts, Setposts] = useState([]);
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname);
+  }, []);
 
   useEffect(() => {
     const uid = localStorage.getItem("userid");

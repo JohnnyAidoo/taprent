@@ -2,8 +2,14 @@ import { Tabs, Tab } from "react-bootstrap";
 import LoginElement from "../component/loginElement";
 import RegisterElement from "../component/registerElement";
 import { useMediaQuery } from "@mui/material";
+import ReactGA from "react-ga";
+import { useEffect } from "react";
 
 function AuthPage() {
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname);
+  }, []);
+
   const mobileScreen = useMediaQuery("(max-width : 500px)");
 
   return (
