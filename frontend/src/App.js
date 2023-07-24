@@ -14,7 +14,7 @@ import ReactGA from "react-ga";
 import { getAnalytics, logEvent } from "firebase/analytics";
 
 function App() {
-  const TRACKINGID = "UA-233212579-1";
+  const TRACKINGID = "G-VJCWW5TCVC";
   ReactGA.initialize(TRACKINGID);
 
   const analytics = getAnalytics();
