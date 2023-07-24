@@ -14,6 +14,8 @@ import {
   Button,
   Modal,
   useMediaQuery,
+  ButtonGroup,
+  CardActions,
 } from "@mui/material";
 import MobileNav from "../component/mobileNav";
 import CardTemp from "../component/cardTemp";
@@ -28,6 +30,11 @@ function Profile() {
     name: "",
     displayPicture: undefined,
     number: "",
+    description: "",
+  });
+  const [newdetails, setnewdetails] = useState({
+    name: "",
+    description: "",
   });
 
   //   use effects / funtions
@@ -36,18 +43,37 @@ function Profile() {
     ReactGA.pageview(window.location.pathname);
   }, []);
 
+  /// get user details
+  const getUserData = async (uid) => {
+    await axios.get(`${Url}users/${uid}`).then((res) => {
+      localStorage.setItem("tel", res.data.phoneNumber);
+      setdetails({
+        name: res.data.name,
+        number: res.data.phoneNumber,
+        description: res.data.description,
+      });
+    });
+  };
   useEffect(() => {
     let userid = localStorage.getItem("userid");
-    const getUserData = async (uid) => {
-      await axios.get(`${Url}users/${uid}`).then((res) => {
-        localStorage.setItem("tel", res.data.phoneNumber);
-        setdetails({ name: res.data.name, number: res.data.phoneNumber });
-      });
-    };
     userid ? getUserData(userid) : (window.location.pathname = "/auth");
 
     const getUsersPosts = () => {};
   }, []);
+
+  const handleUpdate = () => {
+    let uid = localStorage.getItem("userid");
+
+    axios
+      .patch(`${Url}users/update/${uid}`, {
+        name: newdetails.name,
+        description: newdetails.description,
+      })
+      .then((res) => {
+        setopen(false);
+        getUserData(uid);
+      });
+  };
 
   const logout = () => {
     localStorage.removeItem("userid");
@@ -82,7 +108,7 @@ function Profile() {
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              padding: "2%",
+              padding: "1%",
             }}
           >
             <Box
@@ -122,23 +148,36 @@ function Profile() {
                   variant="standard"
                   label="Name"
                   defaultValue={details.name}
+                  onChange={(e) => {
+                    setnewdetails({ name: e.target.value });
+                  }}
                 ></TextField>
               </h4>
               <TextField
                 sx={{ width: "80%" }}
                 variant="standard"
                 label=" Description "
-                defaultValue=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis enim veritatis quis iusto sed officiis, rem dolores libero eveniet omnis sunt cupiditate explicabo
-                    neque voluptas reprehenderit blanditiis quisquam. Dolores, blanditiis?"
+                defaultValue={details.description}
                 multiline
                 rows={5}
-                maxRows={8}
+                onChange={(e) => {
+                  setnewdetails({ description: e.target.value });
+                }}
               ></TextField>
+              <CardActions>
+                <Button onClick={() => setopen(false)} color="error">
+                  Cancel
+                </Button>
+                <Button onClick={handleUpdate} variant="contained">
+                  Confirm
+                </Button>
+              </CardActions>
             </CardContent>
           </Card>
         </Box>
       </Modal>
       {/* end of modal */}
+      {/*  */}
 
       {/* side bar */}
       <Sidebar profile={true} />
@@ -200,12 +239,7 @@ function Profile() {
                 <h4 style={{ fontSize: 30, fontWeight: "bold" }}>
                   {details.name}
                 </h4>
-                <Typography variant="body1">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Debitis enim veritatis quis iusto sed officiis, rem dolores
-                  libero eveniet omnis sunt cupiditate explicabo neque voluptas
-                  reprehenderit blanditiis quisquam. Dolores, blanditiis?
-                </Typography>
+                <Typography variant="body1">{details.description}</Typography>
               </div>
             </CardContent>
           </Card>
