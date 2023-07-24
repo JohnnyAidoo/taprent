@@ -25,9 +25,10 @@ function App() {
       <Header exact />
       <Router>
         <Routes>
-          <Route path="/mysaved" element={<SavedPage />} />
           <Route exact path="/" element={<Home />} />
           <Route exact path="/explore" element={<Explore />} />
+          <Route path="/mysaved" element={<SavedPage />} />
+          <Route path="/details/mysaved" element={<Home saved="saved" />} />
           <Route path="profile" element={<Profile />} />
           <Route path="auth" element={<AuthPage />} />
           <Route path="details/:postid" element={<MoreDetail />} />

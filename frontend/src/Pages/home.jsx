@@ -6,10 +6,18 @@ import Url from "../component/url";
 import Loading from "../component/loading";
 import MobileNav from "../component/mobileNav";
 import ReactGA from "react-ga";
+import { useNavigate } from "react-router-dom";
 
-function Home() {
+function Home(props) {
+  const navigate = useNavigate();
   const [posts, setposts] = useState([]);
   const [load, setload] = useState();
+
+  useEffect(() => {
+    if (props.saved == "saved") {
+      navigate("/mysaved");
+    }
+  }, []);
 
   useEffect(() => {
     ReactGA.pageview(window.location.pathname);
