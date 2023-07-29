@@ -248,10 +248,10 @@ function Header() {
           />
         </a>
         <div id="searchBar">
-          <input placeholder="search" type="text" />
+          {/* <input placeholder="search" type="text" />
           <button className="btn">
             <i className="fa fa-search" aria-hidden="true"></i>
-          </button>
+          </button> */}
         </div>
         <div className="d-flex">
           <Button
