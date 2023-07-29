@@ -38,8 +38,13 @@ function MoreDetail() {
   const [open, setopen] = useState({ open: false, message: "" });
 
   useEffect(() => {
-    ReactGA.pageview(window.location.pathname);
+    setcurrent_loc(window.location.pathname);
   }, []);
+
+  const [author_info, setAuthor_info] = useState({
+    author: "",
+    description: "",
+  });
 
   const [post_item, setPost_item] = useState({
     title: "",
@@ -60,6 +65,8 @@ function MoreDetail() {
   const ctr = "#FD5200";
   const ctr2 = "#AF3800";
   const message = "Check Out This House Available For Rent At OneRent ";
+
+  // axios
 
   const handleSaveItem = (e) => {
     let userid = post_item.author;
@@ -83,7 +90,7 @@ function MoreDetail() {
     axios
       .get(`${Url}posts/${postid}`)
       .then((res) => {
-        console.log(res.data);
+        sessionStorage.setItem("author", res.data.author);
         setPost_item({
           title: res.data.title,
           description: res.data.description,
@@ -96,7 +103,13 @@ function MoreDetail() {
         });
       })
       .then(() => {
-        console.log("done");
+        let author = sessionStorage.getItem("author");
+        axios.get(`${Url}users/${author}`).then((res) => {
+          setAuthor_info({
+            author: res.data.name,
+            description: res.data.description,
+          });
+        });
       });
   }, []);
 
@@ -204,16 +217,6 @@ function MoreDetail() {
           <Row xs={1} md={2}>
             <Col>
               <Carousel interval={null}>
-                {/* <Carousel.Item>
-                    <Card.Img variant='top' src={img1}  style={{borderRadius: '5%'}}/>
-                </Carousel.Item> 
-                <Carousel.Item>
-                    <Card.Img variant='top' src={img2}  style={{borderRadius: '5%'}}/>
-                </Carousel.Item>
-                <Carousel.Item>
-                    <Card.Img variant='top' src={img2}  style={{borderRadius: '5%'}} />
-                </Carousel.Item> */}
-
                 {/* Image Carousel */}
                 {post_item.photos.map((photo) => (
                   <Carousel.Item>
@@ -333,7 +336,7 @@ function MoreDetail() {
         <p style={{ color: "grey", fontWeight: "bold" }}>Description</p>
 
         <Container>
-          <p>{post_item.description}</p>
+          <p style={{ paddingInline: 50 }}>{post_item.description}</p>
         </Container>
         <hr />
         <p style={{ color: "grey", fontWeight: "bold" }}>Agent Information</p>
@@ -343,15 +346,10 @@ function MoreDetail() {
               <Avatar style={{ width: 150, height: 150 }} />
             </Col>
             <Col>
-              <b>Agent Something</b>
+              <b style={{ fontSize: 25 }}>{author_info.author}</b>
               <br />
-              <b>Location</b>
-              <Col>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Laboriosam minima porro, debitis optio repellendus quo possimus
-                maiores quas quasi pariatur obcaecati est quia voluptatum odit
-                ea earum magnam illum quod.
-              </Col>
+              <b>About</b>
+              <Col>{author_info.description}</Col>
             </Col>
           </Row>
         </Container>
