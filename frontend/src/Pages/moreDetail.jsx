@@ -270,7 +270,11 @@ function MoreDetail() {
                     >
                       <Button
                         href={`tel:${post_item.telephone}`}
-                        style={{ backgroundColor: ctr, color: "white" }}
+                        style={{
+                          backgroundColor: ctr,
+                          color: "white",
+                          width: "100%",
+                        }}
                         variant="primary"
                       >
                         <i className="fa fa-phone"></i> Call
