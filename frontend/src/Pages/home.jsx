@@ -11,10 +11,9 @@ import { useNavigate } from "react-router-dom";
 function Home(props) {
   const navigate = useNavigate();
   const [posts, setposts] = useState([]);
-  const [load, setload] = useState();
-
+  const array = [1, 2, 3, 4, 5, 6, 7];
   useEffect(() => {
-    if (props.saved == "saved") {
+    if (props.saved === "saved") {
       navigate("/mysaved");
     }
   }, []);
@@ -27,10 +26,8 @@ function Home(props) {
     axios.get(`${Url}posts`).then((res) => {
       setposts(res.data);
     });
-  }, []);
-  useEffect(() => {
-    document.readyState !== "complete" ? setload(<Loading />) : setload("");
   });
+
   return (
     <>
       <Sidebar home={true} />
@@ -44,21 +41,22 @@ function Home(props) {
         }}
       >
         <div id="grid">
-          {posts.map((post) => (
-            <CardTemp
-              key={post._id}
-              id={post._id}
-              photos={post.photos}
-              title={post.title}
-              location={post.location}
-              tel={post.telephone}
-            />
-          ))}
+          {posts.length == 0
+            ? array.map((item) => <Loading />)
+            : posts.map((post) => (
+                <CardTemp
+                  key={post._id}
+                  id={post._id}
+                  photos={post.photos}
+                  title={post.title}
+                  location={post.location}
+                  tel={post.telephone}
+                />
+              ))}
         </div>
       </div>
 
       <MobileNav value={0} />
-      {load}
     </>
   );
 }

@@ -11,10 +11,9 @@ import Url from "./url";
 import axios from "axios";
 import { redirect } from "react-router-dom";
 import logo from "../images/logo.png";
-import { keyframes } from "@emotion/react";
 import { Paper, Typography, Modal as SuccessModal } from "@mui/material";
 
-function Header() {
+function Header(props) {
   const [popup, setpopup] = useState(false);
   const [title, settitle] = useState("");
   const [price, setprice] = useState("");
@@ -41,12 +40,6 @@ function Header() {
     userid ? setauthor(userid) : setauthor("");
     userid ? setdisplay_upload_btn("block") : setdisplay_upload_btn("none");
   });
-
-  const addToList = (e) => {
-    let name = e.target.name;
-    console.log(e.target.checked);
-    e.target.checked ? setFeatures([...features, name]) : features.pop();
-  };
 
   const handleUpload = async (event) => {
     const files = event.target.files;
@@ -103,7 +96,6 @@ function Header() {
         redirect("/");
       })
       .catch((err) => console.error(err));
-    //console.log(imageUrls);
   };
 
   return (
@@ -239,7 +231,7 @@ function Header() {
         style={{ marginBottom: "2%" }}
         className=" d-flex p-4 justify-content-between"
       >
-        <a href="/" style={{ display: "flex", width: "15%" }}>
+        <a href="/" style={{ display: "flex", width: "5%" }}>
           <img
             id="headimg"
             src={logo}
@@ -247,11 +239,12 @@ function Header() {
             style={{ aspectRatio: 1 / 1, width: "80%" }}
           />
         </a>
-        <div id="searchBar">
-          {/* <input placeholder="search" type="text" />
-          <button className="btn">
-            <i className="fa fa-search" aria-hidden="true"></i>
-          </button> */}
+        {props.children}
+        <div id="searchBar" style={{ display: props.defaultSearch }}>
+          <a href="#" className="d-flex align-items-center">
+            <div style={{ width: "95%" }}></div>
+            <i className="fa fa-search"></i>
+          </a>
         </div>
         <div className="d-flex">
           <Button

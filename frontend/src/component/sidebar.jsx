@@ -57,9 +57,6 @@ const Sidebar = (props) => {
                 <i className="fa fa-home"></i> Home{" "}
               </Nav.Link>
             </Nav.Item>
-            {/* <Nav.Item>
-                <Nav.Link  className="text-dark" active={props.explore} href="/explore" style={{padding:'12%'}}> <i className="fa fa-compass"></i> Explore</Nav.Link>
-                </Nav.Item> */}
             <Nav.Item>
               <Nav.Link
                 className="text-dark"
@@ -78,10 +75,19 @@ const Sidebar = (props) => {
                 href="/profile"
                 style={{ padding: "12%" }}
               >
-                {" "}
                 <i className="fa fa-user"></i> Profile
               </Nav.Link>
             </Nav.Item>
+            {/* <Nav.Item>
+              <Nav.Link
+                className="text-dark"
+                active={props.search}
+                href="/search"
+                style={{ padding: "12%" }}
+              >
+                <i className="fa fa-search"></i> Search
+              </Nav.Link>
+            </Nav.Item> */}
           </Nav>
         </ul>
       </div>

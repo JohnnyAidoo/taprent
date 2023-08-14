@@ -11,7 +11,8 @@
   border-radius: 10px;
   border: solid 0.2px #d3d4d9;
 }
-#searchBar:hover {
+#searchBar:hover,
+#searchBar:focus {
   outline: solid 1px var(--ctr);
 }
 #searchBar input {
