@@ -1,10 +1,5 @@
 import "./App.css";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-} from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./Pages/home";
 import Header from "./component/header";
 import Search from "./Pages/searchPage";
@@ -26,26 +21,18 @@ function App() {
   const analytics = getAnalytics();
   logEvent(analytics, "notification_received");
 
-  useEffect(() => {
-    window.location.pathname != "/search"
-      ? setheader(<Header />)
-      : setheader("");
-  }, [window.location.pathname]);
-
   return (
     <>
-      {header}
-      <Router>
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/search" element={<Search />} />
-          <Route path="/mysaved" element={<SavedPage />} />
-          <Route path="/details/mysaved" element={<Home saved="saved" />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="auth" element={<AuthPage />} />
-          <Route path="details/:postid" element={<MoreDetail />} />
-        </Routes>
-      </Router>
+      <Header />
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/search/:query" element={<Search />} />
+        <Route path="/mysaved" element={<SavedPage />} />
+        <Route path="/details/mysaved" element={<Home saved="saved" />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="auth" element={<AuthPage />} />
+        <Route path="details/:postid" element={<MoreDetail />} />
+      </Routes>
     </>
   );
 }

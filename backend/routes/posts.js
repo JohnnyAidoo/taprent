@@ -14,10 +14,11 @@ router.get("/", async (req, res) => {
 //search for posts
 router.get("/search/:queryparam", async (req, res) => {
   try {
-    post_model.createIndex({ title: "text" });
-    post_model.find({ $text: { $search: "four" } }).then((message) => {
-      res.json(message);
-    });
+    post_model
+      .find({ $text: { $search: req.params.queryparam } })
+      .then((message) => {
+        res.json(message);
+      });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

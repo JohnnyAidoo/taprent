@@ -9,37 +9,49 @@ import {
 } from "react-bootstrap";
 import Url from "./url";
 import axios from "axios";
-import { redirect } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import logo from "../images/logo.png";
-import { Paper, Typography, Modal as SuccessModal } from "@mui/material";
+import {
+  Paper,
+  Typography,
+  Modal as SuccessModal,
+  IconButton,
+  Autocomplete,
+  TextField,
+} from "@mui/material";
 
 function Header(props) {
   const [popup, setpopup] = useState(false);
-  const [title, settitle] = useState("");
-  const [price, setprice] = useState("");
-  const [location, setlocation] = useState("");
-  const [description, setdescription] = useState("");
-  const [imageUrls, setimageUrls] = useState([]);
-  const [features, setFeatures] = useState([]);
-  const [author, setauthor] = useState();
+  const [postObj, setPostObj] = useState({
+    title: "",
+    price: "",
+    location: "",
+    description: "",
+    imageUrls: [],
+    features: [],
+    author: "",
+  });
+  const navigate = useNavigate();
+  const [seacrhedPost, setSearchedPost] = useState();
   const [open, setopen] = useState({ open: false, message: "" });
 
   const [display_upload_btn, setdisplay_upload_btn] = useState();
 
   const primary = "#FBF5F3";
-  const secondary = "#FBF5F3";
-  const ctr = "#FD5200";
-  const ctr2 = "#AF3800";
 
   const list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-  ////////////////////////////////////////////////////////////////
-
   useEffect(() => {
     const userid = localStorage.getItem("userid");
-    userid ? setauthor(userid) : setauthor("");
+    userid ? setPostObj({ author: userid }) : setPostObj({ author: "" });
     userid ? setdisplay_upload_btn("block") : setdisplay_upload_btn("none");
   });
+
+  useEffect(() => {
+    axios.get(`${Url}posts`).then((res) => {
+      setPostObj(res.data);
+    });
+  }, []);
 
   const handleUpload = async (event) => {
     const files = event.target.files;
@@ -63,16 +75,11 @@ function Header(props) {
 
         // Retrieve the URL of the uploaded image
         const imageUrl = response.data.url;
-        setimageUrls([...imageUrls, imageUrl]);
+        setPostObj({ imageUrls: [...postObj.imageUrls, imageUrl] });
       } catch (error) {
         console.error("Error:", error);
       }
     }
-
-    // Log the image URLs
-    imageUrls.forEach((url, index) => {
-      console.log(`Image ${index + 1}: ${url}`);
-    });
   };
 
   onsubmit = async (e) => {
@@ -81,14 +88,14 @@ function Header(props) {
     let telephone = await localStorage.getItem("tel");
     axios
       .post(`${Url}posts`, {
-        title: title,
-        price: price,
-        location: location,
-        features: features,
-        description: description,
-        photos: imageUrls,
+        title: postObj.title,
+        price: postObj.price,
+        location: postObj.location,
+        features: postObj.features,
+        description: postObj.description,
+        photos: postObj.imageUrls,
         telephone: telephone,
-        author: uid,
+        author: postObj.author,
       })
       .then((res) => {
         setpopup(false);
@@ -97,6 +104,58 @@ function Header(props) {
       })
       .catch((err) => console.error(err));
   };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    navigate(`/search/${seacrhedPost}`);
+  };
+
+  const searchTerms = [
+    "Single Room",
+    "One-Bedroom Apartment",
+    "Studio Apartment",
+    "One Room Self Contain",
+    "Two-Bedroom Apartment",
+    "Three-Bedroom Apartment",
+    "Four-Bedroom Apartment",
+    "Five-Bedroom Apartment",
+    "Six-Bedroom Apartment",
+    "Chamber and Hall",
+    "Furnished Apartment",
+    "Unfurnished Apartment",
+    "Loft Apartment",
+    "Penthouse Suite",
+    "Duplex",
+    "Townhouse",
+    "Condo",
+    "Shared Apartment",
+    "Co-living Space",
+    "Serviced Apartment",
+    "Student Housing",
+    "Guest Room",
+    "Bachelor Apartment",
+    "Micro-Apartment",
+    "Efficiency Apartment",
+    "Office Space for Rent",
+    "Commercial Property",
+    "Shared Office",
+    "Coworking Space",
+    "Retail Space",
+    "Executive Suite",
+    "Virtual Office",
+    "Conference Room Rental",
+    "Small Office",
+    "Startup Incubator Space",
+    "Creative Studio",
+    "Medical Office Space",
+    "Industrial Workspace",
+    "Warehouse Space",
+    "Flexible Workspace",
+    "Retail Storefront",
+    "Open-Plan Office",
+    "Executive Office Suite",
+    "Home Office",
+  ];
 
   return (
     <>
@@ -108,7 +167,8 @@ function Header(props) {
           <CloseButton
             onClick={() => {
               setpopup(false);
-              setFeatures([]);
+              //! to check
+              setPostObj({ features: [] });
             }}
           />
         </Modal.Header>
@@ -127,7 +187,7 @@ function Header(props) {
               maxLength={40}
               style={{ marginBottom: "2%" }}
               onChange={(e) => {
-                settitle(e.target.value);
+                setPostObj({ title: e.target.value });
               }}
             />
             <div
@@ -142,7 +202,7 @@ function Header(props) {
                 type="number"
                 placeholder="Price"
                 onChange={(e) => {
-                  setprice(e.target.value);
+                  setPostObj({ price: e.target.value });
                 }}
               />
               <Form.Control
@@ -155,7 +215,7 @@ function Header(props) {
               style={{ marginBottom: "2%" }}
               placeholder="Location"
               onChange={(e) => {
-                setlocation(e.target.value);
+                setPostObj({ location: e.target.value });
               }}
             />
             <div className="d-flex mb-2">
@@ -175,11 +235,11 @@ function Header(props) {
 
             <Form.Control
               style={{ marginBottom: "2%", minHeight: "30vh" }}
-              placeholder="discription"
+              placeholder="description"
               size="lg"
               as="textarea"
               onChange={(e) => {
-                setdescription(e.target.value);
+                setPostObj({ description: e.target.value });
               }}
             />
 
@@ -218,7 +278,6 @@ function Header(props) {
       >
         <Paper sx={{ padding: 2 }}>
           <Typography variant="h5" color="green">
-            {" "}
             <i className="fa fa-check"></i> {open.message}
           </Typography>
         </Paper>
@@ -229,23 +288,41 @@ function Header(props) {
 
       <header
         style={{ marginBottom: "2%" }}
-        className=" d-flex p-4 justify-content-between"
+        className=" d-flex p-4 justify-content-between align-items-center"
       >
         <a href="/" style={{ display: "flex", width: "5%" }}>
           <img
             id="headimg"
             src={logo}
-            alt=""
-            style={{ aspectRatio: 1 / 1, width: "80%" }}
+            alt="one rent logo"
+            style={{ aspectRatio: 1 / 1, width: "100%" }}
           />
         </a>
+
+        {/* search bar */}
         {props.children}
-        <div id="searchBar" style={{ display: props.defaultSearch }}>
-          <a href="#" className="d-flex align-items-center">
-            <div style={{ width: "95%" }}></div>
-            <i className="fa fa-search"></i>
-          </a>
-        </div>
+
+        <Autocomplete
+          freeSolo
+          id="search"
+          onChange={(event, value) => setSearchedPost(value)}
+          options={searchTerms}
+          sx={{ width: "30%" }}
+          renderInput={(params) => (
+            <form onSubmit={handleSearch} style={{ display: "flex" }}>
+              <TextField
+                {...params}
+                label="search"
+                sx={{ width: "80%", border: "none", outline: "none" }}
+              />
+              <Button type="submit">
+                <i className="fa fa-search"></i>
+              </Button>
+            </form>
+          )}
+        />
+
+        {/* Upload btn */}
         <div className="d-flex">
           <Button
             onClick={() => {
