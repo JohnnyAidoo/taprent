@@ -1,12 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  Button,
-  ButtonGroup,
-  CloseButton,
-  Form,
-  Modal,
-  ModalBody,
-} from "react-bootstrap";
+import { Button, ButtonGroup, CloseButton, Form, Modal } from "react-bootstrap";
 import Url from "./url";
 import axios from "axios";
 import { redirect, useNavigate } from "react-router-dom";
@@ -15,9 +8,9 @@ import {
   Paper,
   Typography,
   Modal as SuccessModal,
-  IconButton,
   Autocomplete,
   TextField,
+  useMediaQuery,
 } from "@mui/material";
 
 function Header(props) {
