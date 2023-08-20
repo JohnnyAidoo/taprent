@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 
 function Header(props) {
+  const mobileScreen = useMediaQuery("(max-width:375px)");
   const [popup, setpopup] = useState(false);
   const [postObj, setPostObj] = useState({
     title: "",
@@ -283,7 +284,10 @@ function Header(props) {
         style={{ marginBottom: "2%" }}
         className=" d-flex p-4 justify-content-between align-items-center"
       >
-        <a href="/" style={{ display: "flex", width: "5%" }}>
+        <a
+          href="/"
+          style={{ display: mobileScreen ? "none" : "flex", width: "5%" }}
+        >
           <img
             id="headimg"
             src={logo}
@@ -296,11 +300,12 @@ function Header(props) {
         {props.children}
 
         <Autocomplete
+          size="small"
           freeSolo
           id="search"
           onChange={(event, value) => setSearchedPost(value)}
           options={searchTerms}
-          sx={{ width: "30%" }}
+          sx={{ width: mobileScreen ? "80%" : "40%" }}
           renderInput={(params) => (
             <form onSubmit={handleSearch} style={{ display: "flex" }}>
               <TextField
